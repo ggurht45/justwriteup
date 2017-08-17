@@ -1,0 +1,22 @@
+goals
+
+
+working on background section. explaining about javafx:
+	-	talk about javafx scenegraph, when root node is discussed.  --done
+	-	talk about launch and start methods --done
+	-	think about what to write next. --done	
+	
+	-	take pic of stagesceneroot, put it in figures. --done
+	-	push
+	-	put stuff on overleaf. 
+	-	update bibliography on overleaf. 
+	-	write about fxml. give a short example and explain it. 
+	-	write about fxmlloader. 
+	-	explain how "" its used in this project, especially static vs class method.
+	-	explain why it is important to get a handle on the controller object. 
+	
+	
+	- snchronized. platform.runlater. print statements to determine which methods actually run. 
+	
+
+	

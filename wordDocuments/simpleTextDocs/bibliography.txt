@@ -1,0 +1,15 @@
+bibliography
+
+
+What is javafx?
+    • http://docs.oracle.com/javafx/2/overview/jfxpub-overview.htm
+    • https://www.tutorialspoint.com/javafx/index.htm
+    • https://en.wikipedia.org/wiki/JavaFX
+    • http://docs.oracle.com/javafx/2/get_started/hello_world.htm (javafx hello world)
+    • https://www.tutorialspoint.com/javafx/javafx_application.htm (create javafx application)
+    • 
+
+
+
+javafx vs fxml:
+- http://www.javafxtutorials.com/the-2-ways-to-write-javafx-programs/

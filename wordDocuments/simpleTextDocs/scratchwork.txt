@@ -1,0 +1,25 @@
+Scratch 
+
+    1. Background
+        a. Leap Motion (v2)
+            i. Java API
+            ii. Native Libraries
+            iii. Limitations of Sensor and Documentation
+        b. JavaFx
+            i. Java vs FXML
+            ii. SceneBuilder
+            iii. Jfoenix
+            iv. ControlsFx
+        c. IntelliJ IDE
+            i. Unix Style Terminal on Windows
+---------------------------------------------------------------------------------------------------------------------------
+
+Leap Motion
+    1. What is leap motion. How does it work? Does it use infrared? What is its coordinate system? 
+	Does it allow for multiple languages? Does it have an api? Is it still relevant today?
+    2. Demonstration of a simple app using leap motion. What is inside the frame object? What is a hand object? 
+	How is info stored inside it? Is it ui or just raw info. 
+    3. Native libraries. What does that mean? How is that setup in intellij ide
+    4. Limitations: occlusion. Not so sensitive. Documentation is a little dated. Not much support for linux. 
+
+(1)Leap Motion controller is a small infrared-enabled sensor that can be attached to one’s computer via a USB cable. It is manufactured and programmed by Leap Motion Inc, US based company located in San Francisco. It comes with its own software that allows it to detect a user’s hand movements in 3D space without any physical touch. The Leap Motion controller accomplishes this via 

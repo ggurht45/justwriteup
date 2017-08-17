@@ -1,0 +1,57 @@
+    1. Constructing Hand UI Model
+        a. Basic 3D Modelling
+        b. Set Location Method
+        c. Concurrency
+
+
+
+	The Leap Motion Java API’s Hand class contains all the possible functions one might need to use when gaining more information about the heirarchical structure of this Java object. For example, given a Hand class object “hand”, we can access the fingers objects for this hand via “hand.fingers()”.  Each Finger object contains four Bone objects which are indexed from 0-3. The Bone class does contain an Enum Type that allows one to easily access them via their anatomical names (distal, intermediate, proximal, metacarpal) rather than just using a numerical index. In abstract terms, the Bone object is a vector of sorts and the ends of this bone vector represent the joints at which the bone attaches to its neigboring bones. These “joints” can be accessed via the prevJoint() and nextJoint() methods which respectively return a vector position of the Bone closer to the wrist and of the Bone object endpoint closer to the tip of the finger. The figure below shows the bones and joints of the hand for which the Leap Motion sensor records data. 
+
+[handBones figure]
+
+A Hand object is only valid if it is detected by the Leap Motion device to be a physical object; if a Hand object is created via code using the Hand() contructor, that hand is considered “invalid” and will return true when the hand.invalid() method is called it. The information contained within a valid Hand object read in from the device is Read Only and can not be changed or updated. 
+
+	The Leap Motion device records numerical data about the hand and finger positions. Using the Hand class provided by the Leap Motion Java API and described above in the previous paragraph, a graphical model was constructed. For this GUI construction, a graphical representation of the hand was built using basic 3D geometric classes provided by the JavaFx framework. The bones of the hand model were represented by the Cylinder class and the joints were represented by the Sphere Javafx class. This Hand model is contained inside the UIHand_Simple Java class. This class extends a base abstract UIHand class which itself inherits from the Javafx class called Group. Group is a type of Node in Javafx that contains an ObservableList of children Nodes that will be added to the Javafx Scene Graph in the order that they are added to the Group. An important point to note is that any transform, effect or property change applied to a Group will also be applied to all the children of that group. The figure below shows an example of how a Group Node can can contain multiple children nodes. 
+
+[javafx_group_node]	
+
+The UIHand_Simple class stores all the fingers bones in two demensional array of Cylinder objects and all the respective joints in a different two demensional array of Spheres. These arrays are of demensions 5x3 to account for the five fingers and the three types of primary finger bones: distal, intermediate and proximal. In addition to these arrays, there is an array containing the four metacarpal bones of the hand; the thumb does not have a corresponding metacarpal bone like the other fingers. The also contains two more cylinders and a sphere to construct the palm section of the hand. To provide the hand with a uniform, well-blended color shading a PhongMaterial object is set as the hand’s material property. Below is a figure showing an excerpt from code which shows the initialization of the UIHand_Simple and part of its constructor. 
+
+[uihand_simple_consturctor]
+
+Each element of the hand, such as all the cylinders and spheres representing the various bones and joints, is added to the childern of the encompasing parent group that represents the hand.
+
+The UIHand_Simple class also contains a method that allows for the graphical hand to be positioned according to the exact postions recorded in a Leap Motion Hand object. This method, which is called setLoc(Hand h), goes through each of the fingers and their respective bones and joints and sets the position and rotation of these these Javafx nodes based upon the Hand object passed in. This method relies on a helper class called ViewMath which contains static methods that are called to position each individual cylinder representing a bone. Two of the important methods in ViewMath are setPositionByVector(Node n, Vector v) and setRotationByVector(Node n, Vector v). The method setPositionByVector sets the translate properties of the Javafx Node passed in to the xyz position recorded in the vector. The setRotationByVector method rotates the Javafx Node passed into it by the direction which is represented by the second argument vector. This method first takes the direction and “corrects” it by flipping the z-value. This is done because Javafx’s coordinate system has the Z-axis increasing outward from the computer screen, while Leap Motion has the Z-axis increasing into the screen. The setRotationByVector finds the angle of rotation finding the the angle of the passed in direction to the Y-axis. In addition to the angle of rotation, the axis upon which the rotation will occur also needs to be defined. The axis of the rotation is found by taking the cross-product between the Y-axis and the “corrected” direction. Below is a snippet of code that shows the setRotationByVector method. 
+
+
+
+
+PhongMaterial, figure from code. --done
+ (what is group. What is javafx node model). --done
+ [explain about uihand-simple. What does it do? How does it do it.] 
+
+
+
+
+
+	Concurrency. Talk about how tasks are set and threads are started. How we are always waiting for user input and always setting setLocation also. How runlater tasks are defined. 
+
+https://docs.oracle.com/javase/8/javafx/api/javafx/application/Application.html
+
+talk about how all classes exted from this application class. 
+
+--javafx section. Also talk about the launch method and the start method. How these work. Lots of magic happens behind the scenes. Concurrency. Threads. Runnable. 
+
+--read some code about javafx application threading stuff. research. 
+write it in a paragraph and explain what it means. 
+
+--look at the code that does task setting. read it a little try to understand. make some notes about what it means and how its wired. 
+write about it. 
+
+-- also write about the frame controller methods offered by leap ui. and talk about the controller2. read code, understand, make notes. and then write about it. 
+
+
+Concurrency in a certain application is the ability of certain parts in the code of that application to run asynchronously or in parallel. 
+
+
+

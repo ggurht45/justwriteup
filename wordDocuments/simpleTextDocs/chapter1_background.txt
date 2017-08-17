@@ -1,0 +1,69 @@
+
+\begin{comment}
+2. Background
+	a. Leap Motion (v2)
+		i. Java API
+		ii. Native Libraries
+		iii. Limitations of Sensor and Documentation
+	b. JavaFx
+		i. Java vs FXML
+		ii. SceneBuilder
+		iii. Jfoenix
+		iv. ControlsFx
+	c. IntelliJ IDE
+		i. Unix Style Terminal on Windows
+\end{comment}
+
+
+
+%---------------------------------------------------------------------------------	
+%	What is JavaFX?
+%---------------------------------------------------------------------------------	
+
+JavaFX is a framework provided by Oracle Corporation that is intended to replace the Swing framework as the standard GUI library for developing desktop applications that can be run on any platform that supports Java. Since the JavaFX 2.0 release, JavaFX application can be written in pure Java code. Before that release, applications written using JavaFX libraries had to be written in Java FX Script, a scripting language designed and used specifically for the purpose of creating GUI applications with JavaFX. This project uses the latest version of this framework, JavaFX 8, which also added support for 3D graphics and sensor support. 
+
+%---------------------------------------------------------------------------------	
+%	Java vs fxml
+%---------------------------------------------------------------------------------	
+
+When writing a JavaFX application, there are two very different approaches that can be used to create the actual user interface (UI) for the application. These are pure Java code and FXML. A brief introduction both of these approaches will be given below. 
+
+The pure Java approach constructs the JavaFX application scene graph procedurally through code. Below is a simple “Hello World” program that shows a quick example of this approach in action.
+
+(code javafxHelloWorld)
+public class HelloWorld extends Application {
+public static void main(String[] args) {
+	launch(args);
+}
+
+@Override
+public void start(Stage primaryStage) {
+	primaryStage.setTitle("Hello World!");
+	Button btn = new Button();
+	btn.setText("Say 'Hello World'");
+	btn.setOnAction(new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent event) {
+			System.out.println("Hello World!");
+		}
+	});
+	
+	StackPane root = new StackPane();
+	root.getChildren().add(btn);
+	primaryStage.setScene(new Scene(root, 300, 250));
+	primaryStage.show();
+}
+}
+
+This small snippet of code contains the overall structure and all of the basic components of a JavaFX application. The first point to note is that the main class which will run the JavaFX application must extend from the abstract base class called javafx.application.Application and implement is abstract start() method. The start() method serves as the main entry point for all JavaFX applications. In the application’s main() method, which is common to all Java applications, a call must be made to the launch() method which is a method defined in the base Application JavaFX class that actually launches the application in doing so makes a call to the start() method. 
+
+The start() method receives a parameter of type Stage which serves as the primary Stage object for the application. Stage is the top-level user interface container object used by JavaFX to house the whole application. In colloquial terms it can be considered to be the “window” object of the whole application. The Stage object is has a setScene() method which requires a Scene object to be passed in. Scene class is the container of current content being displayed by the application. An application can have multiple scenes which display different pages of the the application. In JavaFX, the actual UI components, such as the StackPane layout Node shown in the simple HelloWorld example above, must be added to the Scene object in order for them to be displayed. This relationship between the Stage, Scene and “root” Node components of a JavaFX application is depicted nicely in FigureX (figure stageSceneRoot).
+(figure stageSceneRoot) 
+The UI components all extend from a parent Node class. One of the improvements that JavaFX brought in regards to its predecessor Swing, is that it represents the entire content of the scene as a tree. More specifically, all of the nodes displayed in a Scene container object must extend from a root level node and be part of the hierarchical scene graph of nodes. FigureX(figure javafx_scenegraph)  displays an example of the JavaFX scene graph. 
+(figure javafx_scenegraph)
+
+
+FXML is a XML-based language created by Oracle Corporation for the purpose of making it easier to define the UI of a JavaFX application. The large difference between these two different approaches makes it difficult to combine them effectively, but it is possible to use them in conjunction with each other (as this project does in the design of its application). 
+
+
