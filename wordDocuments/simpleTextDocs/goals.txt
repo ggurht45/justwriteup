@@ -13,7 +13,12 @@ working on background section. explaining about javafx:
 	-	add figure label to code sample --works. so happy.
 	-	work on writing on computer rather than online. faster feedback. --nah. doesnt work
 	
-	-	put stuff on overleaf. 
+	-	put stuff on overleaf. --working on it. seem to have a method that works now. 
+	
+	-	work hard
+	
+	-	what is fxml. 
+	-	give a very short example of fxml
 	
 	
 	

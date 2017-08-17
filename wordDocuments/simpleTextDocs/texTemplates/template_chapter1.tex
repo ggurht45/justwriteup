@@ -122,7 +122,57 @@ The UI components all extend from a parent Node class. One of the improvements t
 \label{fig:javafxSceneGraph}
 \end{figure}
 
-FXML is a XML-based language created by Oracle Corporation for the purpose of making it easier to define the UI of a JavaFX application. The large difference between these two different approaches makes it difficult to combine them effectively, but it is possible to use them in conjunction with each other (as this project does in the design of its application). 
+
+Now that the pure Java code approach of writing JavaFX applications has been introduced, let us discuss the other approach to writing JavaFX applications; FXML. FXML is a XML-based language created by Oracle Corporation for the purpose of making it easier to define the UI of a JavaFX application. While the pure Java code approach is a much more imperetive and procedural way to write JavFX applications, FXML is a more declartive way. It resembles HTML and can also reference a controller java class which can access and modify the UI elements defined in the FXML file. Figure \ref{fig:simpleFXML} shows a very simple FXML file that creates a VBox layout and adds a button to it. This FXML file also has a Java controller class attached to it which is called MyController.java and shown in Figure \ref{fig:simpleController}
+
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<?language JavaScript?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="myView" layoutX="10.0" layoutY="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MyController">
+  <children>
+    <Button fx:id="okBtn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#printHelloWorld" text="OK" textAlignment="CENTER" />
+  </children>
+</VBox>
+\end{lstlisting}
+\caption{A FXML file defining a simple layout and referencing a controller java class.}
+\label{fig:simpleFXML}
+\end{figure}
+
+
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+public class MyController 
+{
+	@FXML
+	private void initialize() 
+	{
+	// this method runs first after all the UI components have been loaded and bound.
+	}
+	
+	@FXML
+	private void printHelloWorld() 
+	{
+		System.out.println("hello world!");
+	}
+}
+\end{lstlisting}
+\caption{A controller for the FXML file. The "FXML" annotation in is used to bind certain elements to java objects in the class.}
+\label{fig:simpleController}
+\end{figure}
+
+
+
+
+
+
+(ending paragraph discussion)
+The large difference between these two different approaches makes it difficult to combine them effectively, but it is possible to use them in conjunction with each other (as this project does in the design of its application). 
 
 
 
