@@ -7,8 +7,16 @@ working on background section. explaining about javafx:
 	-	think about what to write next. --done	
 	
 	-	take pic of stagesceneroot, put it in figures. --done
-	-	push
+	-	push --done
+	
+	- 	put line numbers on code sample --done, but looks too left. 
+	-	add figure label to code sample --works. so happy.
+	-	work on writing on computer rather than online. faster feedback. --nah. doesnt work
+	
 	-	put stuff on overleaf. 
+	
+	
+	
 	-	update bibliography on overleaf. 
 	-	write about fxml. give a short example and explain it. 
 	-	write about fxmlloader. 

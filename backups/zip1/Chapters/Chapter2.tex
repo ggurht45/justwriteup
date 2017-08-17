@@ -65,6 +65,23 @@ The \verb UIHand_Simple class also contains a method that allows for the graphic
 \section{Concurrency}
 to be written..
 
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+// Hello.java
+import javax.swing.JApplet;
+import java.awt.Graphics;
+
+public class Hello extends JApplet {
+    public void paintComponent(Graphics g) {
+        g.drawString("Hello, world!", 65, 95);
+    }    
+}
+\end{lstlisting}
+\caption[setRotationByVector]{A snippet of code showing how the rotation is set for an arbitrary Node object of the JavaFX Hand Model.}
+\label{fig:codeSample1}
+\end{figure}
+
 
 --read some code about javafx application threading stuff. research. 
 write it in a paragraph and explain what it means. 

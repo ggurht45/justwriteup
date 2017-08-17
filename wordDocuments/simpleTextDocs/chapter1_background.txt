@@ -60,6 +60,7 @@ This small snippet of code contains the overall structure and all of the basic c
 
 The start() method receives a parameter of type Stage which serves as the primary Stage object for the application. Stage is the top-level user interface container object used by JavaFX to house the whole application. In colloquial terms it can be considered to be the “window” object of the whole application. The Stage object is has a setScene() method which requires a Scene object to be passed in. Scene class is the container of current content being displayed by the application. An application can have multiple scenes which display different pages of the the application. In JavaFX, the actual UI components, such as the StackPane layout Node shown in the simple HelloWorld example above, must be added to the Scene object in order for them to be displayed. This relationship between the Stage, Scene and “root” Node components of a JavaFX application is depicted nicely in FigureX (figure stageSceneRoot).
 (figure stageSceneRoot) 
+
 The UI components all extend from a parent Node class. One of the improvements that JavaFX brought in regards to its predecessor Swing, is that it represents the entire content of the scene as a tree. More specifically, all of the nodes displayed in a Scene container object must extend from a root level node and be part of the hierarchical scene graph of nodes. FigureX(figure javafx_scenegraph)  displays an example of the JavaFX scene graph. 
 (figure javafx_scenegraph)
 
