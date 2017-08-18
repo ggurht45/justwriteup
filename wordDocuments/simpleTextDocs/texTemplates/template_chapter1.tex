@@ -221,19 +221,19 @@ Scene Builder is a software that can be installed on one's computer to help desi
 %----------------------------------- Jfoenix
 \subsection{Jfoenix Library}
 
-what is it? material design. short explaination of how it can be incorporated into scenebuilder and project. intellij maven. etc. 
+Jfoenix is a library that is used in this project. This is an open source java library that implements Google Material Design for JavaFX compenents. This library can be included as a dependency via the Maven using the commands: 
+\begin{lstlisting}
+<dependency>
+    <groupId>com.jfoenix</groupId>
+    <artifactId>jfoenix</artifactId>
+    <version>1.4.0</version>
+</dependency>
+\end{lstlisting}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Maven is a build automation tool that can also serve as a package manager that makes finding and installing dependencies simple. This library will be downloaded from Maven 2 Central Repository. To include this Jfoenix library within Scene Builder, one has to find where the JAR file for the Jfoenix library was downloaded. Then, going to Scene Builder, clicking on the gear icon in the Library panel will show a drop-down menu which has the option for "Import JAR/FXML File" as depicted in Figure \ref{fig:addLibrarySceneBuilder}. Selecting this option will allow for the Jfoenix JAR file to be specified and the custom components to be loaded into the Scene Builder. 
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.35]{Figures/addLibrarySceneBuilder.png}
+\caption{This is how to add a external library of custom components to the Scene Builder for UI prototyping.}
+\label{fig:addLibrarySceneBuilder}
+\end{figure}
