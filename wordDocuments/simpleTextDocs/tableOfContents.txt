@@ -8,7 +8,6 @@
 		i. Java vs FXML
 		ii. SceneBuilder
 		iii. Jfoenix
-		iv. ControlsFx
 	c. IntelliJ IDE
 		i. Unix Style Terminal on Windows
 3. Constructing Hand UI Model

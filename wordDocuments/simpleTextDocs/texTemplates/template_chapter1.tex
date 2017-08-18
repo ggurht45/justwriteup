@@ -135,7 +135,7 @@ Now that the pure Java code approach of writing JavaFX applications has been int
 
 <VBox fx:id="myView" layoutX="10.0" layoutY="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MyController">
   <children>
-    <Button fx:id="okBtn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#printHelloWorld" text="OK" textAlignment="CENTER" />
+    <Button fx:id="okBtn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#printHelloWorld" text="Say Hello World" textAlignment="CENTER" />
   </children>
 </VBox>
 \end{lstlisting}
@@ -166,15 +166,37 @@ public class MyController
 \label{fig:simpleController}
 \end{figure}
 
+The result from both of these HelloWorld examples will be as showing in Figure \ref{fig:helloWorldResult}. The large difference between these two approaches makes it difficult to combine them effectively, but it is possible to use them in conjunction with each other. This project takes such an approach. For the UI construcion of the the user's hand model, the pure java code approach was taken. However, for the interface of the application the table construction showing all of the collected data, the FXML approach was taken. 
+
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.5]{Figures/helloWorldResult.JPG}
+\caption{The output of the simple HelloWorld application.}
+\label{fig:helloWorldResult}
+\end{figure}
 
 
+One of the things that should be discussed is how communication can happen between different components of the application when FXML files are being used. There is a special class called FXMLLoader which is used to load FXML files and return the object graph of UI components these files contain. The FXMLLoader contains two \verb {load()} methods one of which is a static class method and the other is an instance method. The important difference between these two methods is that that instance \verb {load()} method can be used to gain access to the controller for the FXML class being loaded. Gaining access to the controller object for an FXML file in other other parts of an application is very important if one has to pass paramters into the view to change the interface. Figure \ref{fig:fxmlLoaderCode} this key difference between the two methods. 
 
-
-
-(ending paragraph discussion)
-The large difference between these two different approaches makes it difficult to combine them effectively, but it is possible to use them in conjunction with each other (as this project does in the design of its application). 
-
-
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+// The approach uses the static "load" method. Not recommended
+Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+ 
+//This approach allows one to access the controller. 
+//create instance of FXMLLoader
+FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml_example.fxml"));
+//get the controller
+MyController controller = loader.<MyController>getController();
+//initialize controller with custom parameters
+controller.initData(data);
+//object graph root handle
+Parent root = (Parent) loader.load();
+\end{lstlisting}
+\caption{Retrieving a reference to the controller object for a loaded FXML file.}
+\label{fig:fxmlLoaderCode}
+\end{figure}
 
 
 
@@ -183,7 +205,35 @@ The large difference between these two different approaches makes it difficult t
 
 
 %----------------------------------- SceneBuilder
-\subsection{SceneBuilder}
---explain what scenbuilder is. mention gluon. how
---how to use it. 
--- show different windows and what they mean. 
+\subsection{Scene Builder}
+Scene Builder is a software that can be installed on one's computer to help design the UI and layout of a JavaFX application. It allows the user to drag and drop components from the library of available components to the central work area where they can be modified and their properties tweaked. This software is a free and open source tool that used to be developed by Oracle Corporation, but is now backed by Gluon. The easy to use drag and drop functionality of the Scenebuilder allows for easy design and rapid iteration. The associated FXML code with UI created by Scene Builder can be incorporated into the JavaFX application. Using Scene Builder code bindings can also be placed on certain UI components to allow for them to execute specific logic that can be defined in the controller class of the FXML file. Figure \ref{fig:sceneBuilderWindow} shows the main layout of the Scene Builder application. There are four main panels of information that have been labelled appropriately in the figure. These are: the Library panel, which contains all of the UI components available for use; the Document panel, which shows the object graph hierarchy of the current scene being built; the Content panel, which shows the work area for user interaction; and finally the Inspector panel, which shows the various properties and layout parameters which can be modified for the currently selected UI component, as well as the various code bindings that can be placed on it. 
+
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.35]{Figures/sceneBuilderWindow.JPG}
+\caption{This shows the different areas of interest in the Scene Builder software.}
+\label{fig:sceneBuilderWindow}
+\end{figure}
+
+
+
+
+%----------------------------------- Jfoenix
+\subsection{Jfoenix Library}
+
+what is it? material design. short explaination of how it can be incorporated into scenebuilder and project. intellij maven. etc. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

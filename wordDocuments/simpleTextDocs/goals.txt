@@ -14,22 +14,38 @@ working on background section. explaining about javafx:
 	-	work on writing on computer rather than online. faster feedback. --nah. doesnt work
 	
 	-	put stuff on overleaf. --working on it. seem to have a method that works now. 
+	-	what is fxml. --done 
+	-	give a very short example of fxml--done
+	-	make a pic of what the both examples should show. --nah will leave this for now. actually will do it. how long can it take
+	-	discuss fxmlloader.--done  what? why? when do i use it?  --done. 
+	-	write about fxml. give a short example and explain it. --done
+	-	write about fxmlloader. --done
+	-	explain how "" its used in this project, especially static vs instance method.--done
+	-	explain why it is important to get a handle on the controller object. --done
 	
-	-	work hard
+	-	work hard. 
+		- good job. you worked hard. keep working hard. it will all pay off ^^
+		- took way too long break from 9:20 -11:20. 
+		- good job. started workign hard again. recite for encouragement. 
+
+	'
+
+	-	fix bug about verb. latex has the weirdest bugs. something about main having problem at 313. and next not getting closed. but actual problem was verbaitum not getting closed i think. --done
 	
-	-	what is fxml. 
-	-	give a very short example of fxml
+	-	fix comments --done
+	- 	discuss scenebuilder. --done
+	
+	
+	-	discuss libraries jfoenix. just discuss it for now. 
+	
+	-	discuss leapmotion. 
+	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 	
+
 	
 	
 	
 	-	update bibliography on overleaf. 
-	-	write about fxml. give a short example and explain it. 
-	-	write about fxmlloader. 
-	-	explain how "" its used in this project, especially static vs class method.
-	-	explain why it is important to get a handle on the controller object. 
-	
-	
-	- snchronized. platform.runlater. print statements to determine which methods actually run. 
+
 	
 
 	
