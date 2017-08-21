@@ -41,10 +41,76 @@ working on chapter 2, ui hand model
 		- took way too long break from 9:20-11:20. 
 		- good job. started workign hard again. recite for encouragement. 
 		- 
+		- started working on writing concurrency stuff. just began but still a very big milestone. good job! ^^
+		- keep up the good work. it will all pay off. 
 	'	
 	
 	- fix spelling and code samples. --done
 	- fix figure names and referencing. --done
+	
+	- explain that javafx scene graph, the ui component of a javafx appliction, is not thread safe. 
+	- '' to modify it, it can only be accessed and updated via the main ui thread. (see below)
+	- explain what is JavaFX Application thread. 
+	
+	- read for understanding: make notes. exposition. 
+	- http://docs.oracle.com/javafx/2/threads/jfxpub-threads.htm
+		- write notes here
+		- quick read. till 45. 
+		- key is keeping the ui responsive. --> so user doesnt get angry. (first paragraph). 
+		- to achieve '' you delegate time-consuming tasks to background threads. 
+		- scenegraph/ui is not threadsafe can be only modified via javafx application thread (jat)
+		- implementing long tasks on ^ makes it unresponsive the ui i mean. 
+		- best practice is to put long time taking tasks on background threads and let the main jat *** proccess user events** 
+		- implementing a background worker by creating or implementing the runnable interface can be rather tricky to get just right and often leads to unintended consequences such as deadlock where the threads are stuck waiting forevever and race conditions in which critical data can be modified relatively simultaneously by two competing threads. 
+		- therefore the recomended approach is to use the javafx apis provided in the ... concurrent package. the classes in this package take care of providing the best implementations to interact with the UI and to ensure the interaction happens on the correct thread. 
+		- java is so nice. lol
+		
+		-NOTE. we only use the task class in the concurrent package. 
+		
+		
+		
+		
+		
+	- https://stackoverflow.com/questions/15160410/usage-of-javafx-platform-runlater-and-access-to-ui-from-a-different-thread
+		- write notes here
+		
+		
+	- https://stackoverflow.com/questions/19755031/how-javafx-application-thread-works
+		- write notes here		
+		
+		
+		
+	'
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	- read the docs on javafx.concurrent and make notes about what to write about. 
+	- also glance at the code to see how you want to explain it. maybe will need to do some debugging. but first read and get working on paragraph. 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
