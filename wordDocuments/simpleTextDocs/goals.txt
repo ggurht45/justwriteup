@@ -1,18 +1,13 @@
 goals
-
-
 working on background section. explaining about javafx:
 	-	talk about javafx scenegraph, when root node is discussed.  --done
 	-	talk about launch and start methods --done
 	-	think about what to write next. --done	
-	
 	-	take pic of stagesceneroot, put it in figures. --done
 	-	push --done
-	
 	- 	put line numbers on code sample --done, but looks too left. 
 	-	add figure label to code sample --works. so happy.
 	-	work on writing on computer rather than online. faster feedback. --nah. doesnt work
-	
 	-	put stuff on overleaf. --working on it. seem to have a method that works now. 
 	-	what is fxml. --done 
 	-	give a very short example of fxml--done
@@ -22,38 +17,60 @@ working on background section. explaining about javafx:
 	-	write about fxmlloader. --done
 	-	explain how "" its used in this project, especially static vs instance method.--done
 	-	explain why it is important to get a handle on the controller object. --done
-	
-	-	work hard. 
-		- good job. you worked hard. keep working hard. it will all pay off ^^
-		- took way too long break from 9:20 -11:20. 
-		- good job. started workign hard again. recite for encouragement. 
-		- 
-
-	'
-
 	-	fix bug about verb. latex has the weirdest bugs. something about main having problem at 313. and next not getting closed. but actual problem was verbaitum not getting closed i think. --done
 	-	fix comments --done
 	- 	discuss scenebuilder. --done
 	-	discuss libraries jfoenix. just discuss it for now. --done
 	-	start discuss leapmotion. --done
+	-	give a small example of lm --done
+	-	look at zifos for inspiration. dont have to write a lot. --done	
+	
+	
+	-	fix spelling mistakes in draft 1. 
+--------------------------------------------------------------
 
-	-	give a small example of lm 
-	-	look at zifos for inspiration. dont have to write a lot. 
-	- 
-	
-	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 	
+
+
+
+
 
 	
+working on chapter 2, ui hand model 	
+	-	work hard. 
+		- good job. you worked hard. keep working hard. it will all pay off ^^
+		- took way too long break from 9:20 -11:20. 
+		- good job. started workign hard again. recite for encouragement. 
+		- 
+	'	
+	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 		
+
+	- why is synchronized important. what does it mean in the program. 
+	- what is run later? is it a thread? does it start multiple threads? 
 	
+	
+	- explain how the program is running several threads in conjuction. 
+	- for example, the one listening on user input, the one processing data from lm
+	
+
 	
 	-	update bibliography on overleaf. 
-
+	
+	
+	
+--------------------------------------------------------------
 	
 
 	
-	-	talk about the right handed coordinate system of leap motion. (do this in the section on coordinate systems)
-
-%----------------------------------- Limitations of Sensor and Documentation
+	
+	
+	
+	
+	
+	
+	
+	
+	
+%----------------------------------- Limitations of Sensor and Documentation (put this when talking about rotation and coordinate systems chapter)
 \subsection{Limitations of Sensor and Documentation}
 --occulusion
 --discontinuation of publishing v2 apps
