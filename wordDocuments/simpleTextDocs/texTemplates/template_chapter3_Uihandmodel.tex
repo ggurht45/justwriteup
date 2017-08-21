@@ -39,15 +39,41 @@ The Leap Motion device records numerical data about the hand and finger position
 \end{figure}
 
 
-The \verb UIHand_Simple class stores all the fingers bones in two dimensional array of Cylinder objects and all the respective joints in a different two dimensional array of Spheres. These arrays are of dimensions 5x3 to account for the five fingers and the three types of primary finger bones: distal, intermediate and proximal. In addition to these arrays, there is an array containing the four metacarpal bones of the hand; the thumb does not have a corresponding metacarpal bone like the other fingers. The also contains two more cylinders and a sphere to construct the palm section of the hand. To provide the hand with a uniform, well-blended color shading a PhongMaterial object is set as the hand’s material property. Below is a figure showing an excerpt from code which shows the initialization of the \verb UIHand_Simple and part of its constructor. 
+The \verb UIHand_Simple class stores all the fingers bones in two dimensional array of Cylinder objects and all the respective joints in a different two dimensional array of Spheres. These arrays are of dimensions 5x3 to account for the five fingers and the three types of primary finger bones: distal, intermediate and proximal. In addition to these arrays, there is an array containing the four metacarpal bones of the hand; the thumb does not have a corresponding metacarpal bone like the other fingers. The also contains two more cylinders and a sphere to construct the palm section of the hand. To provide the hand with a uniform, well-blended color shading a PhongMaterial object is set as the hand’s material property. Figure \ref{fig:uihandsimpleConst} shows the initialization of the \verb UIHand_Simple and part of its constructor to illustrate how the hand model was designed.
+
 
 \begin{figure}[th]
 \centering
-\includegraphics[scale=0.5]{Figures/uihand_simple_constructor.JPG}
-\caption[UIHandSimple Constructor]{A snippet of code showing how a the UIHandSimple class, representing the graphical hand, is constructed. }
+\begin{lstlisting}
+public class UIHand_Simple extends UIHand {
+    private static float fingerRadius = 14f;
+	//Hand elements
+    private Cylinder[][] fingerBones;
+    private Sphere[][] fingerJoints;
+    private Cylinder[] knuckleSpans;
+	...
+    public UIHand_Simple(Color color, boolean wireframe) {
+        //Execute the Group constructor
+        super();
+        //Create the materials
+        PhongMaterial dark = new PhongMaterial(color);
+        PhongMaterial light = new PhongMaterial(color.brighter());
+        //Initialize Finger bones
+        fingerBones = new Cylinder[5][];
+        for (int i = 0; i < 5; ++i) {
+            fingerBones[i] = new Cylinder[3];
+            for (int j = 0; j < 3; ++j) {
+                fingerBones[i][j] = new Cylinder();
+                //set material and radius and drawMode
+                fingerBones[i][j].setMaterial(dark);
+                fingerBones[i][j].setRadius(fingerRadius / ViewMath.radiusScaleFactor);
+                if (wireframe) fingerBones[i][j].setDrawMode(DrawMode.LINE);
+            }
+		...
+\end{lstlisting}
+\caption[UIHandSimple Constructor]{A snippet of code showing how a the UIHandSimple class, representing the graphical hand, is constructed.}
 \label{fig:uihandsimpleConst}
 \end{figure}
-
 
 Each element of the hand, such as all the cylinders and spheres representing the various bones and joints, is added to the children of the encompassing parent group that represents the hand.
 
@@ -56,11 +82,25 @@ Each element of the hand, such as all the cylinders and spheres representing the
 %	SECTION 2 Set Location Method
 %------------------------------------------------
 \section{Set Location Method}
-The \verb UIHand_Simple class also contains a method that allows for the graphical hand to be positioned according to the exact positions recorded in a Leap Motion Hand object. This method, which is called setLoc(Hand h), goes through each of the fingers and their respective bones and joints and sets the position and rotation of these these JavaFX nodes based upon the Hand object passed in. This method relies on a helper class called ViewMath which contains static methods that are called to position each individual cylinder representing a bone. Two of the important methods in ViewMath are setPositionByVector(Node n, Vector v) and setRotationByVector(Node n, Vector v). The method setPositionByVector sets the translate properties of the JavaFX Node passed in to the XYZ position recorded in the vector. The setRotationByVector method rotates the JavaFX Node passed into it by the direction which is represented by the second argument vector. This method first takes the direction and “corrects” it by flipping the z-value. This is done because JavaFX's coordinate system has the Z-axis increasing outward from the computer screen, while Leap Motion has the Z-axis increasing into the screen. The setRotationByVector finds the angle of rotation finding the the angle of the passed in direction to the Y-axis. In addition to the angle of rotation, the axis upon which the rotation will occur also needs to be defined. The axis of the rotation is found by taking the cross-product between the Y-axis and the “corrected” direction. Below is a snippet of code that shows the setRotationByVector method. 
+The \verb UIHand_Simple class also contains a method that allows for the graphical hand to be positioned according to the exact positions recorded in a Leap Motion Hand object. This method, which is called setLoc(Hand h), goes through each of the fingers and their respective bones and joints and sets the position and rotation of these these JavaFX nodes based upon the Hand object passed in. This method relies on a helper class called ViewMath which contains static methods that are called to position each individual cylinder representing a bone. Two of the important methods in ViewMath are setPositionByVector(Node n, Vector v) and setRotationByVector(Node n, Vector v). The method setPositionByVector sets the translate properties of the JavaFX Node passed in to the XYZ position recorded in the vector. The setRotationByVector method rotates the JavaFX Node passed into it by the direction which is represented by the second argument vector. This method first takes the direction and “corrects” it by flipping the z-value. This is done because JavaFX's coordinate system has the Z-axis increasing outward from the computer screen, while Leap Motion has the Z-axis increasing into the screen. The setRotationByVector finds the angle of rotation finding the the angle of the passed in direction to the Y-axis. In addition to the angle of rotation, the axis upon which the rotation will occur also needs to be defined. The axis of the rotation is found by taking the cross-product between the Y-axis and the “corrected” direction. Figure \ref{fig:setRotationByVectorCode} shows how rotation is set for nodes in the hand model.
+
 
 \begin{figure}[th]
 \centering
-\includegraphics[scale=0.5]{Figures/setRotationByVector_code.JPG}
+\begin{lstlisting}
+//This method rotates a given JavaFx node to point in the direction passed in
+public static void setRotationByVector(Node node, Vector direction) {
+	//Correct the direction to correspond to JavaFx Coordinate system
+	Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
+	//Find the angle of the direction to the y-axis; in degrees
+	double angle = correctedDirection.angleTo(Vector.yAxis()) * 180 / Math.PI;
+	//Find the axis of rotation by taking the cross product of the corrected direction with the y-axix
+	Point3D axis = vectorToPoint(correctedDirection.cross(Vector.yAxis()));
+	//Set the axis and angle of rotation on the Node object
+	node.setRotate(angle);
+	node.setRotationAxis(axis);
+}
+\end{lstlisting}
 \caption[setRotationByVector Method]{A snippet of code showing how the rotation is set for an arbitrary Node object of the JavaFX Hand Model.}
 \label{fig:setRotationByVectorCode}
 \end{figure}
