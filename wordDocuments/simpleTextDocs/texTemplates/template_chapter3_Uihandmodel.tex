@@ -18,7 +18,7 @@
 %	SECTION 1 Basic 3D Modeling
 %------------------------------------------------
 \section{Basic 3D Modeling}
-The Leap Motion Java API’s Hand class contains all the possible functions one might need to use when gaining more information about the heirarchical structure of this Java object. For example, given a Hand class object “hand”, we can access the fingers objects for this hand via “hand.fingers()”.  Each Finger object contains four Bone objects which are indexed from 0-3. The Bone class does contain an Enum Type that allows one to easily access them via their anatomical names (distal, intermediate, proximal, metacarpal) rather than just using a numerical index. In abstract terms, the Bone object is a vector of sorts and the ends of this bone vector represent the joints at which the bone attaches to its neigboring bones. These “joints” can be accessed via the prevJoint() and nextJoint() methods which respectively return a vector position of the Bone closer to the wrist and of the Bone object endpoint closer to the tip of the finger. The figure below shows the bones and joints of the hand for which the Leap Motion sensor records data. 
+The Leap Motion Java API’s Hand class contains all the possible functions one might need to use when gaining more information about the hierarchical structure of this Java object. For example, given a Hand class object “hand”, we can access the fingers objects for this hand via “hand.fingers()”.  Each Finger object contains four Bone objects which are indexed from 0-3. The Bone class does contain an Enum Type that allows one to easily access them via their anatomical names (distal, intermediate, proximal, metacarpal) rather than just using a numerical index. In abstract terms, the Bone object is a vector of sorts and the ends of this bone vector represent the joints at which the bone attaches to its neighboring bones. These “joints” can be accessed via the prevJoint() and nextJoint() methods which respectively return a vector position of the Bone closer to the wrist and of the Bone object endpoint closer to the tip of the finger. The figure below shows the bones and joints of the hand for which the Leap Motion sensor records data.  
 
 \begin{figure}[th]
 \centering
@@ -27,15 +27,14 @@ The Leap Motion Java API’s Hand class contains all the possible functions one 
 \label{fig:HandBones}
 \end{figure}
 
-
 A Hand object is only valid if it is detected by the Leap Motion device to be a physical object; if a Hand object is created via code using the Hand() constructor, that hand is considered “invalid” and will return true when the hand.invalid() method is called it. The information contained within a valid Hand object read in from the device is Read Only and can not be changed or updated. 
 
-The Leap Motion device records numerical data about the hand and finger positions. Using the Hand class provided by the Leap Motion Java API and described above in the previous paragraph, a graphical model was constructed. For this GUI construction, a graphical representation of the hand was built using basic 3D geometric classes provided by the JavaFx framework. The bones of the hand model were represented by the Cylinder class and the joints were represented by the Sphere JavaFx class. This Hand model is contained inside the \verb UIHand_Simple Java class. This class extends a base abstract UIHand class which itself inherits from the Javafx class called Group. Group is a type of Node in Javafx that contains an ObservableList of children Nodes that will be added to the Javafx Scene Graph in the order that they are added to the Group. An important point to note is that any transform, effect or property change applied to a Group will also be applied to all the children of that group. The figure below shows an example of how a Group Node can can contain multiple children nodes.
+The Leap Motion device records numerical data about the hand and finger positions. Using the Hand class provided by the Leap Motion Java API and described above in the previous paragraph, a graphical model was constructed. For this GUI construction, a graphical representation of the hand was built using basic 3D geometric classes provided by the JavaFX framework. The bones of the hand model were represented by the Cylinder class and the joints were represented by the Sphere JavaFX class. This Hand model is contained inside the \verb UIHand_Simple Java class. This class extends a base abstract UIHand class which itself inherits from the JavaFX class called Group. Group is a type of Node in JavaFX that contains an ObservableList of children Nodes that will be added to the JavaFX Scene Graph in the order that they are added to the Group. An important point to note is that any transform, effect or property change applied to a Group will also be applied to all the children of that group. The figure below shows an example of how a Group Node can can contain multiple children nodes.
 
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.75]{Figures/javafx_group_node.JPG}
-\caption[JavaFx Group Node]{The Group Node structure in the JavaFx framework. }
+\caption[JavaFx Group Node]{The Group Node structure in the JavaFX framework. }
 \label{fig:javafxGroupNode}
 \end{figure}
 
@@ -45,7 +44,7 @@ The \verb UIHand_Simple class stores all the fingers bones in two dimensional ar
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.5]{Figures/uihand_simple_constructor.JPG}
-\caption[UIHandSimple Constructor]{A snippet of code showing how a the UIHandSimple class, representing the graphical hand, is constructed. }
+\caption[UIHandSimple Constructor]{A snippet of code showing how a the \verb UIHand_Simple class, representing the graphical hand, is constructed. }
 \label{fig:uihandsimpleConst}
 \end{figure}
 
@@ -57,12 +56,12 @@ Each element of the hand, such as all the cylinders and spheres representing the
 %	SECTION 2 Set Location Method
 %------------------------------------------------
 \section{Set Location Method}
-The \verb UIHand_Simple class also contains a method that allows for the graphical hand to be positioned according to the exact postions recorded in a Leap Motion Hand object. This method, which is called setLoc(Hand h), goes through each of the fingers and their respective bones and joints and sets the position and rotation of these these Javafx nodes based upon the Hand object passed in. This method relies on a helper class called ViewMath which contains static methods that are called to position each individual cylinder representing a bone. Two of the important methods in ViewMath are setPositionByVector(Node n, Vector v) and setRotationByVector(Node n, Vector v). The method setPositionByVector sets the translate properties of the Javafx Node passed in to the xyz position recorded in the vector. The setRotationByVector method rotates the Javafx Node passed into it by the direction which is represented by the second argument vector. This method first takes the direction and “corrects” it by flipping the z-value. This is done because Javafx’s coordinate system has the Z-axis increasing outward from the computer screen, while Leap Motion has the Z-axis increasing into the screen. The setRotationByVector finds the angle of rotation finding the the angle of the passed in direction to the Y-axis. In addition to the angle of rotation, the axis upon which the rotation will occur also needs to be defined. The axis of the rotation is found by taking the cross-product between the Y-axis and the “corrected” direction. Below is a snippet of code that shows the setRotationByVector method. 
+The \verb UIHand_Simple class also contains a method that allows for the graphical hand to be positioned according to the exact positions recorded in a Leap Motion Hand object. This method, which is called setLoc(Hand h), goes through each of the fingers and their respective bones and joints and sets the position and rotation of these these JavaFX nodes based upon the Hand object passed in. This method relies on a helper class called ViewMath which contains static methods that are called to position each individual cylinder representing a bone. Two of the important methods in ViewMath are setPositionByVector(Node n, Vector v) and setRotationByVector(Node n, Vector v). The method setPositionByVector sets the translate properties of the JavaFX Node passed in to the XYZ position recorded in the vector. The setRotationByVector method rotates the JavaFX Node passed into it by the direction which is represented by the second argument vector. This method first takes the direction and “corrects” it by flipping the z-value. This is done because JavaFX's coordinate system has the Z-axis increasing outward from the computer screen, while Leap Motion has the Z-axis increasing into the screen. The setRotationByVector finds the angle of rotation finding the the angle of the passed in direction to the Y-axis. In addition to the angle of rotation, the axis upon which the rotation will occur also needs to be defined. The axis of the rotation is found by taking the cross-product between the Y-axis and the “corrected” direction. Below is a snippet of code that shows the setRotationByVector method. 
 
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.5]{Figures/setRotationByVector_code.JPG}
-\caption[setRotationByVector]{A snippet of code showing how the rotation is set for an arbitrary Node object of the JavaFX Hand Model.}
+\caption[setRotationByVector Method]{A snippet of code showing how the rotation is set for an arbitrary Node object of the JavaFX Hand Model.}
 \label{fig:setRotationByVectorCode}
 \end{figure}
 

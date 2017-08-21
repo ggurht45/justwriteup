@@ -42,21 +42,28 @@ working on chapter 2, ui hand model
 		- good job. started workign hard again. recite for encouragement. 
 		- 
 	'	
-	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 		
+	
+	- fix spelling and code samples. 
+	
+	- write one sentence at a time. think about what the sentence should be. write out what you should be expressing (as if you are trying to explain it to a friend). seeing this in words will make it more concrete and help you write what you need to. 
+	
+	- think about what questions you are trying to answer. write them in the paragraph to help you begin
+	
+	- can take out driving questions later. 
 
+	
+	
+	
+	
+	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 		
 	- why is synchronized important. what does it mean in the program. 
 	- what is run later? is it a thread? does it start multiple threads? 
-	
-	
 	- explain how the program is running several threads in conjuction. 
 	- for example, the one listening on user input, the one processing data from lm
 	
 
 	
 	-	update bibliography on overleaf. 
-	
-	
-	
 --------------------------------------------------------------
 	
 
