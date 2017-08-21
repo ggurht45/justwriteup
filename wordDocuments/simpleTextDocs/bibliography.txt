@@ -13,3 +13,7 @@ What is javafx?
 
 javafx vs fxml:
 - http://www.javafxtutorials.com/the-2-ways-to-write-javafx-programs/
+
+leapmotion sensor:
+http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-controller-work/
+

@@ -27,18 +27,20 @@ working on background section. explaining about javafx:
 		- good job. you worked hard. keep working hard. it will all pay off ^^
 		- took way too long break from 9:20 -11:20. 
 		- good job. started workign hard again. recite for encouragement. 
+		- 
 
 	'
 
 	-	fix bug about verb. latex has the weirdest bugs. something about main having problem at 313. and next not getting closed. but actual problem was verbaitum not getting closed i think. --done
-	
 	-	fix comments --done
 	- 	discuss scenebuilder. --done
+	-	discuss libraries jfoenix. just discuss it for now. --done
+	-	start discuss leapmotion. --done
+
+	-	give a small example of lm 
+	-	look at zifos for inspiration. dont have to write a lot. 
+	- 
 	
-	
-	-	discuss libraries jfoenix. just discuss it for now. 
-	
-	-	discuss leapmotion. 
 	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 	
 
 	
@@ -49,3 +51,22 @@ working on background section. explaining about javafx:
 	
 
 	
+	-	talk about the right handed coordinate system of leap motion. (do this in the section on coordinate systems)
+
+%----------------------------------- Limitations of Sensor and Documentation
+\subsection{Limitations of Sensor and Documentation}
+--occulusion
+--discontinuation of publishing v2 apps
+--sensor resetting by opening palm
+--not enough documentation for linux/ubuntu. 
+--talk about the right handed coordinate system of leap motion. (do this in the section on coordinate systems)
+
+
+
+
+------Appendix A:
+setting up project in intellij ide. 
+--discuss how to set the library path for compiling and running jar. and program. 
+talk about sdk and how its different from just installing leap motion. <- runs a process. etc. to be able to receive info from that process we need 
+native lib. 
+--read the page on lm website and summarize
