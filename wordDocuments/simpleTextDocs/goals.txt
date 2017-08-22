@@ -48,7 +48,7 @@ working on chapter 2, ui hand model
 	- fix spelling and code samples. --done
 	- fix figure names and referencing. --done
 	
-	- explain that javafx scene graph, the ui component of a javafx appliction, is not thread safe. 
+	- explain that javafx scene graph, the ui component of a javafx appliction, is not thread safe. 	
 	- '' to modify it, it can only be accessed and updated via the main ui thread. (see below)
 	- explain what is JavaFX Application thread. 
 	
@@ -66,7 +66,13 @@ working on chapter 2, ui hand model
 		- scenegraph/ui is not threadsafe can be only modified via javafx application thread (jat)
 		- implementing long tasks on ^ makes it unresponsive the ui i mean. 
 		- best practice is to put long time taking tasks on background threads and let the main jat *** proccess user events** 
+		
+		
 		- implementing a background worker by creating or implementing the runnable interface can be rather tricky to get just right and often leads to unintended consequences such as deadlock where the threads are stuck waiting forevever and race conditions in which critical data can be modified relatively simultaneously by two competing threads. 
+		
+		
+		------------->>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<----------
+		
 		- therefore the recomended approach is to use the javafx apis provided in the ... concurrent package. the classes in this package take care of providing the best implementations to interact with the UI and to ensure the interaction happens on the correct thread. 
 		- java is so nice. lol. instead of rolling your own, its better to go to the shop. 
 		
@@ -87,17 +93,19 @@ working on chapter 2, ui hand model
 		
 		It is important to note that the Task class, since it implements the java.utils.concurrent.FutureTask class, fits into the traditional Java concurrency model also. The FutureTask class implements the Runnable interface, one of the key requirements for being able to be executed as a thread. Therefore, the Tasks can also can be used within the Java concurrency Executor API and also can be passed to a thread as a parameter.
 
-		
+	
 		------show how task is used in our application. background is done now. 
 		In this 
 		
 -----------------
+new quick goals. 
 -read more about platform.runlater.
 -learn how its used in our code. 
 -write and explain in the paper. 
 
 --anything i write that i learned while doing this project is fair game and good stuff to write expositionally about.
 
+-re-read my madman words and clean them up. spell check. carpenter. 
 
 
 -----------------		

@@ -9,6 +9,10 @@
 	a. Basic 3D Modelling
 	b. Set Location Method
 	c. Concurrency
+		i. JavaFX Concurrent Package
+		ii. Project Application
+		
+		
 -------------------------------------------------
 \end{comment}
 
@@ -112,7 +116,33 @@ public static void setRotationByVector(Node node, Vector direction) {
 %	SECTION 3 Concurrency
 %------------------------------------------------
 \section{Concurrency}
-One of the key concepts that is used in writing this project's application was that of concurrency. (explain app can become unresponsive if we do things squetially. therefore we need to use the classes in javafx.concurrent package to achieve responsive and userfriendly experience.)
+One of the key concepts that is used in writing this project's application was that of concurrency. Concurrency in a JavaFX application is very important as it allows for the UI of to be responsive to user interactions despite the fact that the application might also be executeing other tasks in the background. In other to achieve this requirement, it is necessary to employ multithreading so that the main application thread can focus on responding to user interactions and other time-consuming tasks can be delegated to background threads. The UI in a JavaFX application is represented by the Scene Graph, which has been discussed earlier. The Scene Graph is not thread-safe and it should only be accessed and updated via the main running application thread, which is called the JavaFX Application thread. Implementing long running tasks on the JavaFX Application thread will invariably make the UI of the application unresponsive. The best practice to avoid this problem by letting the JavaFX Application thread focus on just processing user events. 
+
+
+%----------------------------------- JavaFX Concurrent Package
+\subsection{JavaFX Concurrent Package}
+%
+One might consider implementing the Runnable interface and creating their own thread objects from scratch to employ in the multithreaded environment required for building JavaFX applications. However, such an approach is not recommended; it can lead to unnecessary complexity and hard to debug problems such as deadlock, which is when competing threads are stuck waiting forever, and race conditions where critical data can be modified relatively simultaneously by two competing threads. 
+(talk bout javafx concurrent package. lead into observable and util concurrency package. )
+
+
+%----------------------------------- Project Application
+\subsection{Project Application}
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+ (explain app can become unresponsive if we do things squetially. therefore we need to use the classes in javafx.concurrent package to achieve responsive and userfriendly experience.)
 
 
 
