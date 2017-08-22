@@ -70,10 +70,8 @@ working on chapter 2, ui hand model
 		
 		- implementing a background worker by creating or implementing the runnable interface can be rather tricky to get just right and often leads to unintended consequences such as deadlock where the threads are stuck waiting forevever and race conditions in which critical data can be modified relatively simultaneously by two competing threads. 
 		
-		
-		------------->>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<----------
-		
 		- therefore the recomended approach is to use the javafx apis provided in the ... concurrent package. the classes in this package take care of providing the best implementations to interact with the UI and to ensure the interaction happens on the correct thread. 
+	
 		- java is so nice. lol. instead of rolling your own, its better to go to the shop. 
 		
 		- new paragraph: overview of concurrent package. 

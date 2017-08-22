@@ -116,14 +116,31 @@ public static void setRotationByVector(Node node, Vector direction) {
 %	SECTION 3 Concurrency
 %------------------------------------------------
 \section{Concurrency}
-One of the key concepts that is used in writing this project's application was that of concurrency. Concurrency in a JavaFX application is very important as it allows for the UI of to be responsive to user interactions despite the fact that the application might also be executeing other tasks in the background. In other to achieve this requirement, it is necessary to employ multithreading so that the main application thread can focus on responding to user interactions and other time-consuming tasks can be delegated to background threads. The UI in a JavaFX application is represented by the Scene Graph, which has been discussed earlier. The Scene Graph is not thread-safe and it should only be accessed and updated via the main running application thread, which is called the JavaFX Application thread. Implementing long running tasks on the JavaFX Application thread will invariably make the UI of the application unresponsive. The best practice to avoid this problem by letting the JavaFX Application thread focus on just processing user events. 
+One of the key concepts that is used in writing this project's application was that of concurrency. Concurrency in a JavaFX application is very important as it allows for the UI of to be responsive to user interactions despite the fact that the application might also be executeing other tasks in the background. In other to achieve this requirement, it is necessary to employ multithreading so that the main application thread can focus on responding to user interactions and other time-consuming tasks can be delegated to background threads. The UI in a JavaFX application is represented by the Scene Graph, which has been discussed earlier. The Scene Graph is not thread-safe and it should only be accessed and updated via the main running application thread, which is called the JavaFX Application thread. Implementing long running tasks on the JavaFX Application thread will invariably make the UI of the application unresponsive. The best practice is to avoid this problem by letting the JavaFX Application thread focus on just processing user events. 
 
 
 %----------------------------------- JavaFX Concurrent Package
 \subsection{JavaFX Concurrent Package}
 %
-One might consider implementing the Runnable interface and creating their own thread objects from scratch to employ in the multithreaded environment required for building JavaFX applications. However, such an approach is not recommended; it can lead to unnecessary complexity and hard to debug problems such as deadlock, which is when competing threads are stuck waiting forever, and race conditions where critical data can be modified relatively simultaneously by two competing threads. 
-(talk bout javafx concurrent package. lead into observable and util concurrency package. )
+One might consider implementing the Runnable interface and creating their own thread objects from scratch to employ in the multithreaded environment required for building JavaFX applications. However, such an approach is not recommended; it can lead to unnecessary complexity and hard to debug problems such as deadlock, which is when competing threads are stuck waiting forever, and race conditions where critical data can be modified relatively simultaneously by two competing threads. Instead, it is much better to use the javafx.concurrent package and the classes contained within it to achieve the multithreading required for a responsive application. The APIs provided by this package encode the best concurrent design implementations which allow for easy interaction with the UI and also ensure that such interactions happen on the appropriate thread of the program. 
+
+To somebody who is familiar with Java technologies, he/she will know that Java already provides a complete set of concurrency related libraries in the java.util.concurrent package. However, these APIs are designed for traditional Java Abstract Data Types (ADTs) such as Lists, Maps etc. JavaFX applications usually are dealing with observable ADTs such as ObservableList and ObservableMap. The main difference between the observable ADTs and the traditional ADTs is that the observable ADTs allow for automatic synchronization between themselves and the view components of the UI. In web development lingo this is sometimes referred to as "two-way" data binding. It means means that if the data in the view changes changes, this change is automatically propogated to the underlying data structure without requiring any work on the programmer's part. Likewise if the observable model is updated with new data the view components will be updated to reflect that change as well. Because of this convenience observable ADTs are very much suited for use in building JavaFX applications. 
+
+
+
+
+
+
+
+describe what is meant by observable. look at the good paragraph for inspiration. --done
+
+connect javafx to observable.--done
+
+ and explain javafx.concurrent.
+
+
+
+(talk bout javafx concurrent package--done. lead into observable--done and util concurrency package. )
 
 
 %----------------------------------- Project Application
