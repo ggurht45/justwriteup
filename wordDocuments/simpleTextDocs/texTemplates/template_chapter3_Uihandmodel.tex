@@ -124,59 +124,19 @@ One of the key concepts that is used in writing this project's application was t
 %
 One might consider implementing the Runnable interface and creating their own thread objects from scratch to employ in the multithreaded environment required for building JavaFX applications. However, such an approach is not recommended; it can lead to unnecessary complexity and hard to debug problems such as deadlock, which is when competing threads are stuck waiting forever, and race conditions where critical data can be modified relatively simultaneously by two competing threads. Instead, it is much better to use the javafx.concurrent package and the classes contained within it to achieve the multithreading required for a responsive application. The APIs provided by this package encode the best concurrent design implementations which allow for easy interaction with the UI and also ensure that such interactions happen on the appropriate thread of the program. 
 
-To somebody who is familiar with Java technologies, he/she will know that Java already provides a complete set of concurrency related libraries in the java.util.concurrent package. However, these APIs are designed for traditional Java Abstract Data Types (ADTs) such as Lists, Maps etc. JavaFX applications usually are dealing with observable ADTs such as ObservableList and ObservableMap. The main difference between the observable ADTs and the traditional ADTs is that the observable ADTs allow for automatic synchronization between themselves and the view components of the UI. In web development lingo this is sometimes referred to as "two-way" data binding. It means means that if the data in the view changes changes, this change is automatically propogated to the underlying data structure without requiring any work on the programmer's part. Likewise if the observable model is updated with new data the view components will be updated to reflect that change as well. Because of this convenience observable ADTs are very much suited for use in building JavaFX applications. 
+To somebody who is familiar with Java technologies, he/she will know that Java already provides a complete set of concurrency related libraries in the java.util.concurrent package. However, these APIs are designed for traditional Java Abstract Data Types (ADTs) such as Lists, Maps etc. JavaFX applications usually are dealing with observable ADTs such as ObservableList and ObservableMap. The main difference between the observable ADTs and the traditional ADTs is that the observable ADTs allow for automatic synchronization between themselves and the view components of the UI. In web development lingo this is sometimes referred to as "two-way" data binding. It means means that if the data in the view changes changes, this change is automatically propogated to the underlying data structure without requiring any work on the programmer's part. Likewise if the observable model is updated with new data the view components will be updated to reflect that change as well. Because of this convenience observable ADTs are very much suited for use in building JavaFX applications. The javafx.concurrent package uses the exisiting APIs found in java.util.concurrent package and repurposes them to also take into account the observable ADTs. It also considers other contraints faced by GUI application developers such as the JavaFX Application thread and its primary role in handling UI interaction. 
 
-
-
-
-
-
-
-describe what is meant by observable. look at the good paragraph for inspiration. --done
-
-connect javafx to observable.--done
-
- and explain javafx.concurrent.
-
-
-
-(talk bout javafx concurrent package--done. lead into observable--done and util concurrency package. )
-
+Broadly speaking, the javafx.concurrent package consists of a Worker interface, which provides the APIs for communcation between the background worker to the UI thread, and two classes called Task and Service, both of which implement the Worker Interface. Task is a fully obervable implementation of the corresponding java.util.concurrent.futureTask class. Therefore, this task class is very much suited for implementing asychronous tasks in JavaFX that can handle user interaction and respond to events exectued on the UI. This ability to handle user events is further displayed by the fact that the task class implements the EventTarget interface. 
 
 %----------------------------------- Project Application
 \subsection{Project Application}
 %
+Creating a custom task requires extending the Task class and implementing the call() method. The call() method is should contain code that only changes states which are safe to be modified from the background thread. Therefore the call() method cannot change the active scene graph nodes displayed on the screen as that may cause runtime exceptions. Nevertheless, since Task is designed to be used in GUI applications, it does have the ability to update observable data properties, change notifications for errors and cancellation of tasks, and respond to event being fired.
 
+-- insert code sample showing use case. 
+-- explain code in some detail so reader can get an idea
+-- explain Platform.runlater
+-- discuss synchronized keyword. 
 
+It is important to note that the Task class, since it implements the java.utils.concurrent.FutureTask class, fits into the traditional Java concurrency model also. The FutureTask class implements the Runnable interface, one of the key requirements for being able to be executed as a thread. Therefore, the Tasks can also can be used within the Java concurrency Executor API and also can be passed to a thread as a parameter.
 
-
-
-
-
-
-
-
-
-
-
- (explain app can become unresponsive if we do things squetially. therefore we need to use the classes in javafx.concurrent package to achieve responsive and userfriendly experience.)
-
-
-
-we are using javafx.concurrent package. read through docs and write notes about what to write and explain. 
-
-
-
-In fact JavaFX is a framework that deals with concurrency to allow it to perform multiple tasks synchronously 
-
-
-
-
-
---read some code about javafx application threading stuff. research. 
-write it in a paragraph and explain what it means. 
-
---look at the code that does task setting. read it a little try to understand. make some notes about what it means and how its wired. 
-write about it. 
-
--- also write about the frame controller methods offered by leap ui. and talk about the controller2. read code, understand, make notes. and then write about it. 

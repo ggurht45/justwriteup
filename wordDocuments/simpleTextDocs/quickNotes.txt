@@ -1,0 +1,90 @@
+quick notes:
+
+
+	- explain that javafx scene graph, the ui component of a javafx appliction, is not thread safe. 	
+	- '' to modify it, it can only be accessed and updated via the main ui thread. (see below)
+	- explain what is JavaFX Application thread. 
+	
+	- read for understanding: make notes. exposition. 
+	
+	
+	- http://docs.oracle.com/javafx/2/threads/jfxpub-threads.htm
+		- write notes here
+		- quick read. till 45. 
+		
+		- paragraph: why use javafx.current package. 
+		
+		- key is keeping the ui responsive. --> so user doesnt get angry. (first paragraph). 
+		- to achieve '' you delegate time-consuming tasks to background threads. 
+		- scenegraph/ui is not threadsafe can be only modified via javafx application thread (jat)
+		- implementing long tasks on ^ makes it unresponsive the ui i mean. 
+		- best practice is to put long time taking tasks on background threads and let the main jat *** proccess user events** 
+		
+		
+		- implementing a background worker by creating or implementing the runnable interface can be rather tricky to get just right and often leads to unintended consequences such as deadlock where the threads are stuck waiting forevever and race conditions in which critical data can be modified relatively simultaneously by two competing threads. 
+		
+		- therefore the recomended approach is to use the javafx apis provided in the ... concurrent package. the classes in this package take care of providing the best implementations to interact with the UI and to ensure the interaction happens on the correct thread. 
+	
+		- java is so nice. lol. instead of rolling your own, its better to go to the shop. 
+		
+		- new paragraph: overview of concurrent package. 
+		- java already provides a whole set of concurreny libraries in the java.util.concurrent package. what the javafx.concurrent package does it it leverages these existing apis and takes into account the javafx application thread and user interface contraints faced by gui developers. it optimeizes the concurrecy libraries to be more suitable for gui development. 
+		
+		- so as has been mentioned, java already has concurrent libraries defined in util package. however these are not that useful for gui application because these type of application require "obervable" implementation of the common data collection types such as an ObservableList and ObservableHashmap. They difference between these observable abstract data types and traditional ones such as arraylist is that these are automatically synchronization with two way data binding between them and view components shown on screen. there is less manual work needed to be done on the programmar's part. the older adt's do not have these functionalities so they are not suited to be used when building ui's. 
+		
+		-direct quote. 
+		 As a result, it is quite difficult to update, add, or remove objects from the model list and at the same time reflect changes in the view component. To overcome this problem, JavaFX uses observable interfaces and their implementation, such as ObserverList<E>.
+		 
+		 
+		 
+		- task, just like service implements the worker interface.<- worker interface provides useful apis to help set up background worker thread, and allowing communication between that thread and jat. 
+		
+		 
+		- so now that we know the importance of the observable interfaces in java, the javafx concurrent package provides classes such as task which is a fully obervable implementation of the corresponding java.util.concurrent.futureTask class. therefore this task class is very much suited for implementing asychronous tasks in javafx that can handle user interaction and respond to events exectued on the ui. This ability to handle user events is further displayed by the fact that the task class implements the eventTarget interface. 
+
+		-task class ---- more in depth:
+		Creating a custom task requires extending the task class and implementing the call() method. the call method is should contain code that only changes states which are safe to be modified from the background thread. Therefore the call method cannot change the active scene graph nodes displayed on the screen as that may cause runtime exceptions. Nevertheless, since Task is designed to be used in GUI applications, it does have the ability to update observable data properties, change notifications for errors and cancellation of tasks, and respond to event being fired.
+		
+		It is important to note that the Task class, since it implements the java.utils.concurrent.FutureTask class, fits into the traditional Java concurrency model also. The FutureTask class implements the Runnable interface, one of the key requirements for being able to be executed as a thread. Therefore, the Tasks can also can be used within the Java concurrency Executor API and also can be passed to a thread as a parameter.
+
+	
+		------show how task is used in our application. background is done now. 
+		In this 
+		
+-----------------
+new quick goals. 
+-read more about platform.runlater.
+-learn how its used in our code. 
+-write and explain in the paper. 
+
+--anything i write that i learned while doing this project is fair game and good stuff to write expositionally about.
+
+-re-read my madman words and clean them up. spell check. carpenter. 
+
+
+-----------------		
+		
+	- https://stackoverflow.com/questions/15160410/usage-of-javafx-platform-runlater-and-access-to-ui-from-a-different-thread
+		- write notes here
+	
+		
+	- https://stackoverflow.com/questions/19755031/how-javafx-application-thread-works
+		- write notes here		
+		
+		
+	
+	- http://docs.oracle.com/javafx/2/api/javafx/concurrent/Task.html
+		-WAY TOO DENSE... SHEESH!
+	
+	- http://www.developer.com/java/data/understanding-java-observable-and-javafx-observable.html (observable stuff in java)
+		-important paragraph:
+		Before JavaFX, Swing developers relied on ArrayList to contain a list of objects and subsequently display them in a list-like UI control, such as JList. But, ArrayList is too generic and was not built keeping in mind the requirement of synchronization when associated with a view component. As a result, it is quite difficult to update, add, or remove objects from the model list and at the same time reflect changes in the view component. To overcome this problem, JavaFX uses observable interfaces and their implementation, such as ObserverList<E>.
+	
+	
+	
+	
+	'
+	
+	
+	
+	
