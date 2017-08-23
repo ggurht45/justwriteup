@@ -22,7 +22,7 @@
 %	SECTION 1 Basic 3D Modeling
 %------------------------------------------------
 \section{Basic 3D Modeling}
-The Leap Motion Java API’s Hand class contains all the possible functions one might need to use when gaining more information about the hierarchical structure of this Java object. For example, given a Hand class object “hand”, we can access the fingers objects for this hand via “hand.fingers()”.  Each Finger object contains four Bone objects which are indexed from 0-3. The Bone class does contain an Enum Type that allows one to easily access them via their anatomical names (distal, intermediate, proximal, metacarpal) rather than just using a numerical index. In abstract terms, the Bone object is a vector of sorts and the ends of this bone vector represent the joints at which the bone attaches to its neighboring bones. These “joints” can be accessed via the prevJoint() and nextJoint() methods which respectively return a vector position of the Bone closer to the wrist and of the Bone object endpoint closer to the tip of the finger. The figure below shows the bones and joints of the hand for which the Leap Motion sensor records data.  
+The Leap Motion Java API’s Hand class contains all the possible functions one might need to use when gaining more information about the hierarchical structure of this Java object. For example, given a Hand class object “hand”, we can access the fingers objects for this hand via “hand.fingers()”.  Each Finger object contains four Bone objects which are indexed from 0-3. The Bone class does contain an Enum Type that allows one to easily access them via their anatomical names (distal, intermediate, proximal, metacarpal) rather than just using a numerical index. In abstract terms, the Bone object is a vector of sorts and the ends of this bone vector represent the joints at which the bone attaches to its neighboring bones. These “joints” can be accessed via the prevJoint() and nextJoint() methods which respectively return a vector position of the Bone closer to the wrist and of the Bone object endpoint closer to the tip of the finger. The Figure \ref{fig:HandBones} shows the bones and joints of the hand for which the Leap Motion sensor records data.  
 
 \begin{figure}[th]
 \centering
@@ -33,7 +33,7 @@ The Leap Motion Java API’s Hand class contains all the possible functions one 
 
 A Hand object is only valid if it is detected by the Leap Motion device to be a physical object; if a Hand object is created via code using the Hand() constructor, that hand is considered “invalid” and will return true when the hand.invalid() method is called it. The information contained within a valid Hand object read in from the device is Read Only and can not be changed or updated. 
 
-The Leap Motion device records numerical data about the hand and finger positions. Using the Hand class provided by the Leap Motion Java API and described above in the previous paragraph, a graphical model was constructed. For this GUI construction, a graphical representation of the hand was built using basic 3D geometric classes provided by the JavaFX framework. The bones of the hand model were represented by the Cylinder class and the joints were represented by the Sphere JavaFX class. This Hand model is contained inside the \verb UIHand_Simple Java class. This class extends a base abstract UIHand class which itself inherits from the JavaFX class called Group. Group is a type of Node in JavaFX that contains an ObservableList of children Nodes that will be added to the JavaFX Scene Graph in the order that they are added to the Group. An important point to note is that any transform, effect or property change applied to a Group will also be applied to all the children of that group. The figure below shows an example of how a Group Node can can contain multiple children nodes.
+The Leap Motion device records numerical data about the hand and finger positions. Using the Hand class provided by the Leap Motion Java API and described above in the previous paragraph, a graphical model was constructed. For this GUI construction, a graphical representation of the hand was built using basic 3D geometric classes provided by the JavaFX framework. The bones of the hand model were represented by the Cylinder class and the joints were represented by the Sphere JavaFX class. This Hand model is contained inside the \verb UIHand_Simple Java class. This class extends a base abstract UIHand class which itself inherits from the JavaFX class called Group. Group is a type of Node in JavaFX that contains an ObservableList of children Nodes that will be added to the JavaFX Scene Graph in the order that they are added to the Group. An important point to note is that any transform, effect or property change applied to a Group will also be applied to all the children of that group. The Figure \ref{fig:javafxGroupNode} shows an example of how a Group Node can can contain multiple children nodes.
 
 \begin{figure}[th]
 \centering
@@ -131,21 +131,41 @@ Broadly speaking, the javafx.concurrent package consists of a Worker interface, 
 %----------------------------------- Project Application
 \subsection{Project Application}
 %
-Creating a custom task requires extending the Task class and implementing the call() method. The call() method is should contain code that only changes states which are safe to be modified from the background thread. Therefore the call() method cannot change the active scene graph nodes displayed on the screen as that may cause runtime exceptions. Nevertheless, since Task is designed to be used in GUI applications, it does have the ability to update observable data properties, change notifications for errors and cancellation of tasks, and respond to event being fired.
+Creating a custom task requires extending the Task class and implementing the call() method. The call() method is should contain code that only changes states which are safe to be modified from the background thread. Therefore the call() method cannot change the active scene graph nodes displayed on the screen as that may cause runtime exceptions. Nevertheless, since Task is designed to be used in GUI applications, it does have the ability to update observable data properties, change notifications for errors and cancellation of tasks, and respond to event being fired. Figure \ref{fig:staticEndTask} gives an example of one of the instances from the project which used a Task class to perform some work in the background thread as the UI was being refreshed to the main screen again. 
 
--- insert code sample showing use case. 
--- explain code in some detail so reader can get an idea
--- talk about enter test mode. 
--- explain Platform.runlater
--- discuss synchronized keyword. 
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+private static class StaticEndTask extends Task<Void> {
+	@Override
+	protected Void call() throws Exception {
+		targetHand.setVisible(false);
+		scene2Button.setVisible(true);
+		...
+	}
+}
+\end{lstlisting}
+\caption[Task Class Code]{This shows part of the implementation of the Task class with call() method defined.}
+\label{fig:staticEndTask}
+\end{figure}
 
-https://stackoverflow.com/questions/15160410/usage-of-javafx-platform-runlater-and-access-to-ui-from-a-different-thread
-https://stackoverflow.com/questions/19755031/how-javafx-application-thread-works
-https://stackoverflow.com/questions/1085709/what-does-synchronized-mean
-https://stackoverflow.com/questions/20183334/what-is-the-synchronized-method-in-java
-https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html
+It is important to note that the Task class, since it implements the java.utils.concurrent.FutureTask class, fits into the traditional Java concurrency model also. The FutureTask class implements the Runnable interface, one of the key requirements for being able to be executed as a thread. Therefore, the Tasks can also can be used within the Java concurrency Executor API and also can be passed to a thread as a parameter. To see this fact in action, consider the Figure \ref{fig:platformRunLater} which shows a method that gets called when the user presses a button to go back to the main screen of the application. This snippet of code shows the Platform.runLater() method being passed various Tasks as parameters. The Platform.runLater() method can be called from any background thread and will add the passed tasks to a queue to be executed in order at a later time on the JavaFX Application thread and then this method returns immediately to the caller. Because of the concurrent behavior of the application, some of the methods in the application that deal with setting parameters and changing object data were initialized with the keyword "synchronized" which prevents multiple threads interferring with the same variables at the same time and generally preventing data consistency errors. 
 
-
-
-It is important to note that the Task class, since it implements the java.utils.concurrent.FutureTask class, fits into the traditional Java concurrency model also. The FutureTask class implements the Runnable interface, one of the key requirements for being able to be executed as a thread. Therefore, the Tasks can also can be used within the Java concurrency Executor API and also can be passed to a thread as a parameter.
+\begin{figure}[th]
+\centering
+\begin{lstlisting}
+public static void endStaticTest(double finalscore, long finaltime, boolean success) {
+	Platform.runLater(new StaticScoreTask(finalscore, finaltime, success));
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	Platform.runLater(new StaticEndTask());
+}
+\end{lstlisting}
+\caption[Passing Task as Parameter]{This code sample from the project shows Task objects being passed successfully to a method which expects to receive Runnable objects.}
+\label{fig:platformRunLater}
+\end{figure}
 

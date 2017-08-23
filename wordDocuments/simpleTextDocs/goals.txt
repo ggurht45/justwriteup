@@ -69,9 +69,19 @@ working on chapter 2, ui hand model
 	- read stackoverflow about synchronized. 
 	- say something about atomic access and not wanting objects to be changed in multiple places. 
 	
-	
-	
-	
+
+-- insert code sample showing use case. 
+-- explain code in some detail so reader can get an idea
+-- talk about enter test mode. 
+-- explain Platform.runlater
+-- discuss synchronized keyword. 
+
+https://stackoverflow.com/questions/15160410/usage-of-javafx-platform-runlater-and-access-to-ui-from-a-different-thread
+https://stackoverflow.com/questions/19755031/how-javafx-application-thread-works
+https://stackoverflow.com/questions/1085709/what-does-synchronized-mean
+https://stackoverflow.com/questions/20183334/what-is-the-synchronized-method-in-java
+https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html
+
 	
 	
 	
