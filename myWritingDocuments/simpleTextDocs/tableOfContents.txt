@@ -1,0 +1,44 @@
+1. Introduction
+2. Background
+	a. Leap Motion (v2)
+		i. Java API
+		ii. Native Libraries
+		iii. Limitations of Sensor and Documentation
+	b. JavaFx
+		i. Java vs FXML
+		ii. SceneBuilder
+		iii. Jfoenix
+	c. IntelliJ IDE
+		i. Unix Style Terminal on Windows
+3. Constructing Hand UI Model
+	a. Basic 3D Modelling
+	b. Set Location Method
+	c. Concurrency
+4. Rotation of Hand UI Model
+	a. JavaFx Coordinate System vs Leap Motion Coordinate System
+	b. Ineffective Leap Motion Data
+		i. Pitch Roll Yaw
+		ii. Negative Zeros
+	c. Simplified Hand Model
+	d. Composite Linear Transformations
+	e. Rotational Matrix
+5. Scoring of Gestures
+	a. Angle Based Comparison Function
+	b. Component Based Comparison Function
+6. Application User Interface 
+	a. User Specific Data Collection
+	b. Visual Rotation of Gesture
+	c. Tabular Display of Data
+	d. Writing and Reading from CSV
+	e. Artifacts and Distribution
+		i. Discontinuation of Leap App Store
+		ii. IDE Build Process and Batch Script
+7. Data Collection
+	a. The Approach Taken
+	b. User Feedback
+8. Results and Analysis
+9. Conclusion
+
+appendix:
+	a. IntelliJ IDE
+		i. Unix Style Terminal on Windows

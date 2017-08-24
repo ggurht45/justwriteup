@@ -1,0 +1,5 @@
+dataOutput/Alice/2017-08-10 13-17-20.hand information
+	Name: gesture4Left
+	Comments: 
+	Result: Yes
+

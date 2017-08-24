@@ -1,0 +1,5 @@
+dataOutput/Alice/2017-08-10 02-05-41.hand information
+	Name: gesture3Left
+	Comments: c3
+	Result: No
+

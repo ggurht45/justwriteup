@@ -1,0 +1,5 @@
+dataOutput/Nik/2017-08-10 14-12-09.hand information
+	Name: gesture5Left
+	Comments: 
+	Result: Yes
+

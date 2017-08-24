@@ -1,0 +1,9 @@
+gestureName, filePath, comments, result
+gesture1Left, dataOutput/Alice/2017-08-10 02-00-34.hand, c1, Yes
+gesture2Left, dataOutput/Alice/2017-08-10 02-00-45.hand, c2, Yes
+gesture3Left, dataOutput/Alice/2017-08-10 02-05-41.hand, c3, No
+gesture1Left, dataOutput/Alice/2017-08-10 13-17-00.hand, , Yes
+gesture2Left, dataOutput/Alice/2017-08-10 13-17-08.hand, , Yes
+gesture3Left, dataOutput/Alice/2017-08-10 13-17-12.hand, , Yes
+gesture4Left, dataOutput/Alice/2017-08-10 13-17-20.hand, , Yes
+gesture5Left, dataOutput/Alice/2017-08-10 13-17-31.hand, , Yes
