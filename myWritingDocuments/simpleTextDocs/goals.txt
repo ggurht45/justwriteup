@@ -1,8 +1,15 @@
 goals
 
 	- github
-	- make skeleton including appendix
-	- get scores for every hand. seperate into two batches. nik's and mine. 
+	- make skeleton
+	- write scoring chapter. with figures and explanations. say why chose the paramters you did. 
+	- write ui chapter
+	- get a picture of supersimple hand. 
+
+	
+	- write rotation chapter
+	- get scores for every hand.
+	- seperate into two batches. nik's and mine. 
 	- github 
 	- make function better. 
 	- scores
