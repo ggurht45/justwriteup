@@ -23,13 +23,20 @@ goals
 	- keep working ^^.	
 	- put on overleaf. --done
 	- finish scoring. --done ^^
-	- make subsections in chap5
+	- write scoring chapter. with figures and explanations. say why chose the paramters you did. --done
+	- see zifos. try to imitate for appui. --done
+	
+	
 	- 
-	- see zifos. try to imitate for appui. 
+	
+	
+	- make subsections in chap5
+	- clean up figures
 	- listen to rain. 
+	
 
 	
-	- write scoring chapter. with figures and explanations. say why chose the paramters you did. 
+
 	
 	
 	
