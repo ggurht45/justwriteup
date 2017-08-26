@@ -1,0 +1,203 @@
+goals
+
+	- github --done
+	- make skeleton --done
+	- make function better. --done
+	- make functions return number between 0-100. --done
+	- print outputs to file. --done
+	- label folder names. --done
+	- seperate by gesture type. --done
+	- class handinfo3 --not needed
+	- get niks data. --done
+	- get my data collected --done
+	- seperate the 2 bad hands --done
+	- make sure to put outputs in appendix. --done
+	- get a picture of supersimple hand. --done
+	- get 20 pics. each gesture rotated 135 --done
+	- get pic of curved straight and thumb --done
+	- put skeleton on overleaf.  --done
+	- resize images --done
+	- try to fix images latex. --done
+	- split into two figures. --done
+	
+	- keep working ^^.	
+	- put on overleaf. --done
+	- finish scoring. --done ^^
+	- make subsections in chap5
+	- 
+	- see zifos. try to imitate for appui. 
+	- listen to rain. 
+
+	
+	- write scoring chapter. with figures and explanations. say why chose the paramters you did. 
+	
+	
+	
+	- write ui chapter
+	- write rotation chapter
+	- talk about pinky gesture 7. thumb. right/left	(this bug also shows componenent based method is better)
+	
+
+	
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+working on background section. explaining about javafx:
+	-	talk about javafx scenegraph, when root node is discussed.  --done
+	-	talk about launch and start methods --done
+	-	think about what to write next. --done	
+	-	take pic of stagesceneroot, put it in figures. --done
+	-	push --done
+	- 	put line numbers on code sample --done, but looks too left. 
+	-	add figure label to code sample --works. so happy.
+	-	work on writing on computer rather than online. faster feedback. --nah. doesnt work
+	-	put stuff on overleaf. --working on it. seem to have a method that works now. 
+	-	what is fxml. --done 
+	-	give a very short example of fxml--done
+	-	make a pic of what the both examples should show. --nah will leave this for now. actually will do it. how long can it take
+	-	discuss fxmlloader.--done  what? why? when do i use it?  --done. 
+	-	write about fxml. give a short example and explain it. --done
+	-	write about fxmlloader. --done
+	-	explain how "" its used in this project, especially static vs instance method.--done
+	-	explain why it is important to get a handle on the controller object. --done
+	-	fix bug about verb. latex has the weirdest bugs. something about main having problem at 313. and next not getting closed. but actual problem was verbaitum not getting closed i think. --done
+	-	fix comments --done
+	- 	discuss scenebuilder. --done
+	-	discuss libraries jfoenix. just discuss it for now. --done
+	-	start discuss leapmotion. --done
+	-	give a small example of lm --done
+	-	look at zifos for inspiration. dont have to write a lot. --done	
+	
+	
+	-	fix spelling mistakes in draft 1. --done
+--------------------------------------------------------------
+
+
+
+look and feel changes. 
+	- make sure each paragraph is idented. 
+	- make code references in text appear like code.
+--------------------------------------------------------------
+
+	
+working on chapter 2, ui hand model 	
+	-	work hard. 
+		- good job. you worked hard. keep working hard. it will all pay off ^^
+		- took way too long break from 9:20-11:20. 
+		- good job. started workign hard again. recite for encouragement. 
+		- 
+		- started working on writing concurrency stuff. just began but still a very big milestone. good job! ^^
+		- keep up the good work. it will all pay off. 
+		- good job. you are doing well. it very hard i understand. its not fun and requires concentration. but you can think of it like brain exercise. 
+	'	
+	
+	- fix spelling and code samples. --done
+	- fix figure names and refe --done
+	- read the docs on javafx.concurrent and make notes about what to write about. --done
+	- read some code about javafx application threading stuff. research. --done
+	- write it in a paragraph and explain what it means. --done
+	
+	
+	- spell check in odt --done
+	- commit and push --done
+	- check on gh just to make sure. --done
+	- put on overleaf --done
+	- download zip and pdf --done
+	- also glance at the code to see how you want to explain it. maybe will need to do some debugging. --done	
+	- put print statements in each call function and synchronized methods. --done
+	- remove unused commented out code --done
+	
+	- run and analyze 
+	- fine and discuss only the ones that are being used
+	- read stackoverflow about synchronized. 
+	- say something about atomic access and not wanting objects to be changed in multiple places. 
+	
+
+-- insert code sample showing use case. 
+-- explain code in some detail so reader can get an idea
+-- talk about enter test mode. 
+-- explain Platform.runlater
+-- discuss synchronized keyword. 
+
+https://stackoverflow.com/questions/15160410/usage-of-javafx-platform-runlater-and-access-to-ui-from-a-different-thread
+https://stackoverflow.com/questions/19755031/how-javafx-application-thread-works
+https://stackoverflow.com/questions/1085709/what-does-synchronized-mean
+https://stackoverflow.com/questions/20183334/what-is-the-synchronized-method-in-java
+https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html
+
+	
+	
+	
+	
+	
+	
+
+	
+	- write one sentence at a time. think about what the sentence should be. write out what you should be expressing (as if you are trying to explain it to a friend). seeing this in words will make it more concrete and help you write what you need to. 
+	- think about what questions you are trying to answer. write them in the paragraph to help you begin
+	
+	- can take out driving questions later. 
+
+	- 	snchronized. platform.runlater. print statements to determine which methods actually run. 		
+	- why is synchronized important. what does it mean in the program. 
+	- what is run later? is it a thread? does it start multiple threads? 
+	- explain how the program is running several threads in conjuction. 
+	- for example, the one listening on user input, the one processing data from lm
+	
+	
+	--look at the code that does task setting. read it a little try to understand. make some notes about what it means and how its wired. 
+	write about it. 
+
+	-- also write about the frame controller methods offered by leap ui. and talk about the controller2. read code, understand, make notes. and then write about it. 
+	
+	
+	
+	
+	
+	-	update bibliography on overleaf. 
+--------------------------------------------------------------
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+%----------------------------------- Limitations of Sensor and Documentation (put this when talking about rotation and coordinate systems chapter)
+\subsection{Limitations of Sensor and Documentation}
+--occulusion
+--discontinuation of publishing v2 apps
+--sensor resetting by opening palm
+--not enough documentation for linux/ubuntu. 
+--talk about the right handed coordinate system of leap motion. (do this in the section on coordinate systems)
+
+
+
+
+------Appendix A:
+setting up project in intellij ide. 
+--discuss how to set the library path for compiling and running jar. and program. 
+talk about sdk and how its different from just installing leap motion. <- runs a process. etc. to be able to receive info from that process we need 
+native lib. 
+--read the page on lm website and summarize
