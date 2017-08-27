@@ -20,14 +20,36 @@ goals
 	- try to fix images latex. --done
 	- split into two figures. --done
 	
-	- keep working ^^.	
+
 	- put on overleaf. --done
 	- finish scoring. --done ^^
 	- write scoring chapter. with figures and explanations. say why chose the paramters you did. --done
-	- see zifos. try to imitate for appui. --done
+	- see zifos. try to imitate for appui. --dones
+	- read clean and show code. --done
+	- use ellipses to bring disparate pieces of code together. --done
+	- talk about animations. --done
+	- dont need to go in depth, just discuss camera camera again or transform rotateAroundY. --done
+	- show pic of both blue and green hand being rotated --done 
+	- could also talk about code. for example user class. handInfo. visual rotation code. --done
+	- also talk about the fact that keyboard can be used for input also. --done
+	- user hand is blue, target hand is green. dont have to be on top of the target hand to get a higher score. --done
+	- rotation button spins both hands (this will be discussed in subsection reference or name.) --done
+	- displayed in a full 360 circle in 7 seconds. at this slow speed the user is able to get a feel for the orientation of their hand the gesture is perdicting. it is sometimes better to see the rotation before attempting. though the user can keep his hand.. and the hand will be spun around also. note--done
 	
 	
-	- 
+
+	- keep working ^^.	
+	- finish new gesture. 
+	- work on tablular data. 
+	- work on csv
+	- back at 7. 
+	- github. tabular discussion
+	
+	
+	
+	
+	- fix sections. 
+	
 	
 	
 	- make subsections in chap5

@@ -23,9 +23,9 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{palatino} % Use the Palatino font by default
 
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=trad-plain,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
-\addbibresource{example.bib} % The filename of the bibliography
+\addbibresource{bib.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 
@@ -240,7 +240,8 @@ The acknowledgments and the people to thank go here, don't forget to include you
 
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
-\include{Chapters/Chapter5_scoring} 
+%\include{Chapters/Chapter0}
+\include{Chapters/Chapter6_appUI}
 \begin{comment}
 \include{Chapters/Chapter1_introduction}
 \include{Chapters/Chapter2_background}
