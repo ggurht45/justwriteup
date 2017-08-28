@@ -17,20 +17,6 @@
 		i. Leap App Store
 		ii. IDE Build Process and Batch Script
 -------------------------------------------------
-figures needed:
-
-homescreen,
-analyze screen.
-load folder button clicked. opened dialog. 
-save to csv opened dialog
-load/create new user screen. 
-load/create new user screen. (with dropdown showing)
-testing screen
-testing screen after rotation done. also showing user hand. 
-savingData popup. 
-table with editing in progress. 
-creating new gesture
-
 \end{comment}
 
 
@@ -41,7 +27,7 @@ In this chapter some of the useful UI features of the application will be discus
 %------------------------------------------------
 \section{Main Layout}
 
-The application has three main scenes. The first one is the home screen which shows buttons to take the user to the other two scenes; "Enter Test Mode" button takes the user to the scene which is used for collecting data, and "Analyze Data" button takes the user to a scene that allows him/her to view the collected data \parencite{theKey}. The home screen also contains two radio buttons to allow the user to select which hand (left or right) he/she will be testing with the gestures. Figure  \ref{fig:homeScreen} shows the layout of the home screen. 
+The application has three main scenes. The first one is the home screen which shows buttons to take the user to the other two scenes; "Enter Test Mode" button takes the user to the scene which is used for collecting data, and "Analyze Data" button takes the user to a scene that allows him/her to view the collected data. The home screen also contains two radio buttons to allow the user to select which hand (left or right) he/she will be testing with the gestures. Figure  \ref{fig:homeScreen} shows the layout of the home screen. 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{Figures/6_homeScreen.JPG}
@@ -154,11 +140,11 @@ Saving a new gesture will add it to the end of the list of currently used gestur
 If the user clicks on the "Analyze Data" button on the home screen, he/she will be taken to a scene shown in Figure \ref{fig:analyzeData}. This scene shows all of the collected data for the currently selected user in a table on the left. The user is able to select rows in the table by pressing the Up or Down keys on the keyboard or by clicking on a row with their mouse. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/6_analyzeScreen.JPG}
+\includegraphics[scale=0.35]{Figures/6_analyzeScreen.JPG}
 \caption[Analyze Data Scene]{The scene which allows user to view and edit some of the meta-data on the hand objects saved for the currently loaded user.}
 \label{fig:analyzeData}
 \end{figure}
-This table is sortable by the columns and the columns can also be rearranged to be in a different order. In addition, some of the columns are actually editable and allow the user to specify changes to the data recorded. These changes will be updated for the user when the application is closed or the user navigates to a different scene. The way in which this table is constructed and made to be editablee is shown in the snippets of code in Figure \ref{fig:tabularDataCode}. This code is all from the controller Java class that is set for this scene. A part of this scene was built using Scene Builder and part of it was procedurally created using just Java code. The table section was prototyped in Scene Builder and the section of the scene to the right showing the two hands was created in Scene Builder.
+This table is sortable by the columns and the columns can also be rearranged to be in a different order. In addition, some of the columns are actually editable and allow the user to specify changes to the data recorded. These changes will be updated for the user when the application is closed or the user navigates to a different scene. The way in which this table is constructed and made to be editable is shown in the snippets of code in Figure \ref{fig:tabularDataCode}. This code is all from the controller Java class that is set for this scene. A part of this scene was built using Scene Builder and part of it was procedurally created using just Java code. The table section was prototyped in Scene Builder and the section of the scene to the right showing the two hands was created in Scene Builder.
 \begin{figure}[H]
 \centering
 \begin{lstlisting}
@@ -182,60 +168,65 @@ col3.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, S
 		h.getValue().setResult(event.getNewValue());
 	}
 });
-...
 //make table editable
 treeTableView.setEditable(true);
 \end{lstlisting}
 \caption[TreeTableView Editable Results Column]{These sections of code show how the table and a specific column were accessed from the FXML file. The code also shows how the column was set up to be editable by the user.}
 \label{fig:tabularDataCode}
 \end{figure}
-
-
-
-
-
-
-
-discuss annotation. reference background. --maybe
-discuss lambda function. observable property. finish up. why need to be editable. explain use case as discussed with clinicians. comments section later. file path changes. etc. have some good discussion. 
-
-
-
-
-\begin{comment}
-
-editable picture. show code about how table was constructed. maybe even discuss scenebuilder. 
-
- The user can click on the "Analyze Data" button to go to the 
-talk about three scenes and show pics. show what happens where and 
-what the typical user would do. 
-take data and analyze it for problems. 
-and then go fix those problems. 
-also save data to csv. read from csv. 
-say some things will be dicussed in other sections. 
-\end{comment}
-
-
-
-
+The code sample shows how the Result column of the table is setup using a lambda function syntax. It's setCellValueFactory() function takes in a parameter from which the result2Property() is returned. This property represents an observable data type that automatically responds to data changes, therefore when the Results column is updated in the view, the changes will automatically get reflected in the underlying model without the programmer having to do anything else. Similarly, the setOnEditCommit() function is set up the same column to allow user to edit it. The Filepath, Comments, and Result column were all made to be editable. An example of the table being edited is shown in Figure \ref{fig:tableEdited} This was done to help facilitate faster data collection and allow clinicians to come back and edit or correct the data if they need to. An instance of how this would be useful is if the patient being tested does not pass some of the gestures, then the clinicians can continue with the default settings of saving the gestures as passing and at a later time come back and edit the table with the real results. This might be more polite than selecting the Result of a gesture attempt to be "No" in from the data collection scene. The comments column was included to allow the clinicians to write any special comments they might need to in regards to a certain gesture. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/6_tableEditingInProgress.JPG}
+\caption[Editing Table Entries]{This demonstrates the editable feature of the table.}
+\label{fig:tableEdit}
+\end{figure}
 
 %------------------------------------------------
 %	SECTION 4 Writing and Reading from CSV
 %------------------------------------------------
 \section{Writing and Reading from CSV}
+Another useful feature of the application is the ability to easily read data in from a CSV file. To do so, the user clicks on the "Load Data" button; this opens up a Java FileChooser dialog which allows the user to specify the CSV file (see Figure \ref{fig:loadCSV}). The directory path for the dialog window that opens up will be set the current folder location from which the application is running.  
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.25]{Figures/6_loadDataButton.JPG}
+\caption[Load Data From CSV]{Load data from CSV file.}
+\label{fig:tableEdit}
+\end{figure}
+Similarly, the option to save the current data shown in the table to a CSV file is also given. It is accessed by clicking on the "Save to CSV" button which opens up a dialog very similar to the one above, except that dialog allows the  user to name the file the data will be saved as. To facilitate these features, the HandInfo class has methods defined that allow for its data properties to be output to a comma separated string. 
 
 
 %------------------------------------------------
 %	SECTION 5 Artifacts and Distribution
 %------------------------------------------------
 \section{Artifacts and Distribution}
+After the application was completed, it had to be packaged in such a way that it should be very easy to distribute to the clinicians. In addition, it should be very easy to run. In other words, no complicated command line options must be required to be typed by the clinicians in order to use the application. Of course the Leap Controller and its necessary software should be installed on the computer in order for this application to be used. In 2013, Leap Motion its own version of an App Store where developers could upload and publish the applications they made with the Leap Motion software. It also represented the central place for people who had bought the Leap Motion controller to be able to find quality applications they could purchase or download onto their computer. However, the company decided to close down this online App Store on June 30, 2017. It is focusing now more on VR technology and how it can be incorporated with a newer version of the Leap Motion company's software \parencite{theKey}. I had been originally planning on uploading my application to the Leap Motion's App Store but because of this news, I had to work on the packaging and distribution by myself. 
 
-maybe this section can all be collapsed into one. (IDE Build Process and Batch Script)
-
-%----------------------------------- Leap App Store
-\subsection{Leap App Store}
-
-%----------------------------------- IDE Build Process and Batch Script
-\subsection{IDE Build Process and Batch Script}
-
-
+For my development environment, I used the IntelliJ IDE. This IDE provides tools to help create build artifacts, such as a standalone JAR file, for a Java project. In order to create the artifact, one needs to open the Project Structure window and navigate to the Artifacts option in the left hand panel. The various build properties that were set up for the distribution of this project are shown in Figure \ref{fig:artifactBuildSettings}. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/6_ide_buildArtifact.JPG}
+\caption[Build Project Artifact]{Project Structure Artifact settings. In the "Output Layout" tab it also shows where the manifest file containing these settings will be saved.}
+\label{fig:artifactBuildSettings}
+\end{figure}
+In the "Output Layout" section of the settings, two folders were set up also. One of these folders, dataOutput, will take the contents of the project's dataOutput folder at the time of the artifact build process. The other folder, lib, is set up to contain all of the additional libraries the project relies on such as Jfoenix and LeapJava. This lib folder also contains the native libraries needed to allow the application to talk to the system process that will be running the Leap Motion controller device. Lastly, I also needed to create two batch files, startWin64.bat and startWin32.bat, to allow the clinicians to run the application by just double clicking on one of these files depending on the system architecture of their computer. The batch script that resides in the startWin64.bat file is shown in Figure \ref{fig:batchScript}. 
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+@echo off
+java -Djava.library.path=%cd%\lib\x64 -Dfile.encoding=windows-1252 -jar %cd%\StudentProject.jar
+\end{lstlisting}
+\caption[Application Batch Script]{This script contains the Java command that will run the prepared Jar file.}
+\label{fig:batchScript}
+\end{figure}
+The result of the build artifact process will result in the application being packaged up into folder with its content shown in Figure \ref{fig:jarFolderStructure}. The JAR file can be run by double clicking on the appropriate batch file. The batch file's Java command will be executed with the runtime parameters to help it locate the native libraries within the folder structure. Because of the way the batch script is defined with the \begin{verbatim}
+%cd%
+\end{verbatim} 
+the application can be saved to or moved any location on one's computer and the application will be able to run just fine. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/6_folderStructure.JPG}
+\caption[JAR Application Folder Structure]{The older structure of the application containing all of its dependencies.}
+\label{fig:jarFolderStructure}
+\end{figure}
+Therefore, the application is packaged and distributed in a self-contained fashion. As long as the user's computer (currently only for Windows OS) has Java v1.8 and Leap Motion software v1.2 installed the application can be run easily. 

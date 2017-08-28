@@ -35,7 +35,18 @@ goals
 	- user hand is blue, target hand is green. dont have to be on top of the target hand to get a higher score. --done
 	- rotation button spins both hands (this will be discussed in subsection reference or name.) --done
 	- displayed in a full 360 circle in 7 seconds. at this slow speed the user is able to get a feel for the orientation of their hand the gesture is perdicting. it is sometimes better to see the rotation before attempting. though the user can keep his hand.. and the hand will be spun around also. note--done
-	
+	editable picture. show code about how table was constructed. maybe even discuss scenebuilder. --don
+	- The user can click on the "Analyze Data" button to go to the talk about three scenes and show pics. show what happens where and what the typical user would do. --done
+	- take data and analyze it for problems.--done 
+	- and then go fix those problems. --done
+	- discuss that the project can be run from everywhere cuz of how batch script written. --done
+	- discuss distribution by jar. but that was not enough. --done
+	- explain how you solved your problems of jar not working. (last one or two sentences)--done
+	- discuss leap app store. --done
+	- show screenshots from intellij. --done
+
+
+
 	
 
 	- keep working ^^.	
