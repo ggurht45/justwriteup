@@ -28,3 +28,12 @@ http://ruzman.de/blog/leap-motion-javafx-3d-hand-1
 
 left handed right handed coordinate system. 
 http://www.learnopengles.com/tag/left-handed-coordinate-system/
+
+
+
+Jose Pereda rotational matrix javafx leap motion
+http://jperedadnr.blogspot.co.uk/2013/06/leap-motion-controller-and-javafx-new.html
+
+
+facts about stroke. 
+https://www.world-heart-federation.org/resources/stroke/

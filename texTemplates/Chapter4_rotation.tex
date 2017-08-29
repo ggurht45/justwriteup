@@ -25,7 +25,7 @@ In this chapter the rotation of the Hand UI model will be discussed.
 The UI model of the hand is built from the Leap Motion sensor data as discussed in the chapter. This data represents the hand as it is displayed in reality above the Leap Motion controller device. Originally the representation of the hand was built from this hand without any further modifications. However, to demonstrate why this is sometimes not the ideal situation, see Figure \ref{fig:handFlat}. It shows the hand as it is displayed in reality; it is in parallel plane above the device. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/4_handFlat.JPG}
+\includegraphics[scale=0.65]{Figures/4_handFlat.JPG}
 \caption[Hand in Flat Orientation]{This shows the user's hand in a flat orientation; as determined by the Leap Motion sensor.}
 \label{fig:handFlat}
 \end{figure}
@@ -125,7 +125,7 @@ Leap Motion's Java API includes a Vector class that contains several useful oper
 roll() function is defined to be gotten by projecting the vector in question onto the x-y plane and taking the angle between this projection and the positive y-axis (which as we know is defined to be pointing upwards in the Leap Motion coordinate system and downwards in JavaFX). See Figure \ref{fig:rollPic} to get a visual understanding of how the roll angle is defined for a given vector.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_rollPic.JPG}
+\includegraphics[scale=0.65]{Figures/4_rollPic.JPG}
 \caption[Roll]{Roll angle as defined in Leap Motion documentation.}
 \label{fig:rollPic}
 \end{figure}
@@ -137,7 +137,7 @@ roll() function is defined to be gotten by projecting the vector in question ont
 During my testing, I realized that the Vector class returns some strange results when we test the pitch() function with the simple x-axis unit vector <1,0,0>. One would expect that the pitch would be zero, since the projection of the x-axis unit vector onto the y-z plane is zero. However, as the debugging result in Figure \ref{fig:negZero} shows, that was not the case. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_negZero.JPG}
+\includegraphics[scale=0.95]{Figures/4_negZero.JPG}
 \caption[Pitch() Debugging]{A simple example's run output that demonstrates the negative zeros and their importance in Leap Motion API.}
 \label{fig:negZero}
 \end{figure}
@@ -147,7 +147,7 @@ It appears to be that a negative zero must be supplied in the z-component of the
 Like the pitch() angle, I noticed something that was a bit strange about the results the roll() function was returning during my debugging. It was returning 135 degrees when I was expecting it to return 45 degrees (see Figure \ref{fig:uncorrectedRoll}) because the vector it is being tested on makes such a projection onto the x-y plane that the roll should be 45. I think the documentation page either has a mistake the roll() method or maybe the Vector class has a error in the way the roll method is defined. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_rollUncorrected.JPG}
+\includegraphics[scale=0.95]{Figures/4_rollUncorrected.JPG}
 \caption[Roll Debugging]{The roll() angle returned for a vector needs to be "corrected".}
 \label{fig:uncorrectedRoll}
 \end{figure}
@@ -181,7 +181,7 @@ This method does not rely on projections to the y-z plane to find out the pitch 
 One of the lessons that this project has highlighted for me is how important it is to simplify a complex problem when finding a solution to it. Of course this sounds like a relatively obvious lesson, but I feel this project forced me to practice it many times. I would like to give a short example of this by talking a little bit about the UIHandSuperSimple class that I wrote when I was working on the problem this chapter addresses. The aptly named super simple hand model was a model of the user's hand that has just three components, a rectangular box to represent the palm, a cylinder to represent the thumb and a sphere to represent the fingers. See Figure \ref{fig:superSimpleHand} to view this masterpiece. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_superSimpleHand.JPG}
+\includegraphics[scale=0.65]{Figures/4_superSimpleHand.JPG}
 \caption[UIHandSuperSimple Hand]{A very basic model of the hand.}
 \label{fig:uncorrectedRoll}
 \end{figure}
@@ -220,7 +220,7 @@ private void fixRotations(Hand h) {
 This method takes in a Leap Motion Hand object and basically performs three transformations on it. Firstly, it performs a yaw rotation of the amount determined by the getFirstYaw() method. The getFirstYaw() method determines what the angle of the hand's direction is to the negative z-axis; and so the first transform that will get added to the UI hand model is will rotate the hand about the y-axis. Figure \ref{fig:afterFirstYaw} shows what the hand model will look like after this first rotational transform has been performed. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_afterFirstYaw.JPG}
+\includegraphics[scale=0.65]{Figures/4_afterFirstYaw.JPG}
 \caption[After First Yaw]{The hand model of Figure \ref{fig:weirdHandShake} after first yaw.}
 \label{fig:afterFirstYaw}
 \end{figure}
@@ -228,7 +228,7 @@ This method takes in a Leap Motion Hand object and basically performs three tran
 Secondly, the pitch angle is determined the getPitch() to see how much to rotate the hand upward to be inline with the y-axis. Also the finalYaw angle is determined using the getFinalYaw() method which will return an angle representing how much the hand model has to be rotated around the y-axis again when the hand is pointing upwards in the positive y-direction in the JavaFX coordinate system. There is no roll angle that is needed for putting the hand in a vertical position. The pitch and finalYaw angle (along with a 0 value for the roll angle) are passed into a helper function called matrixRotateNode(), shown in Figure \ref{fig:matrixRotateNode}. This method computes the composite rotational matrix based upon the angles that are passed into it and performs the correct composite rotation around the calculated axis of rotation on the JavaFX Node object that is passed into as its first argument. If for a moment we consider the hand model originally started in the weird handshake position as stated above, then after the first yaw, and pitch have been performed, the hand model will be resting with its fingers pointing straight up and its palm facing the x-axis. See Figure \ref{fig:afterPitch}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{Figures/4_afterPitch.JPG}
+\includegraphics[scale=0.65]{Figures/4_afterPitch.JPG}
 \caption[After Pitch]{The hand model of Figure \ref{fig:weirdHandShake} after first yaw and pitch have been performed.}
 \label{fig:afterPitch}
 \end{figure}
@@ -236,7 +236,7 @@ Secondly, the pitch angle is determined the getPitch() to see how much to rotate
 Finally, after the final yaw has also been performed, the hand model will be resting in the final vertical orientation with its fingers pointing up and the palm facing the negative z-axis as shown in Figure \ref{fig:finalPos}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/4_handFinalFix.JPG}
+\includegraphics[scale=0.65]{Figures/4_handFinalFix.JPG}
 \caption[After Final Yaw]{The hand model after it's orientation has been fixed.}
 \label{fig:finalPos}
 \end{figure}
@@ -270,22 +270,22 @@ public static void matrixRotateNode(Node n, double roll, double pitch, double ya
 The code shown in the matrixRotateNode() in the Figure \ref{fig:matrixRotateNode} above looks very complicated. It is the result of mathematical formulas that determine how to rotate an object in 3D space. Given three angles representing the pitch, yaw and roll we can compute a final matrix of rotation from the three smaller matrices that would represent rotations about the specific x-axis, y-axis, z-axis that the pitch, yaw, and roll angles would represent respectively. The matrices that would represent these three individual rotations are shown in Figure \ref{fig:threeMatrices}. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/4_handFinalFix.JPG}
+\includegraphics[scale=0.75]{Figures/4_threeSmallMatrices.JPG}
 \caption[Single Rotation Matrices]{The three matrices representing individual rotations about the x, y, and z axis.}
 \label{fig:threeMatrices}
 \end{figure}
 
-Their compsite matrix would be computed by A = \[A_z*A_y*A_x\] and the result of this matrix multiplication operation is shown in Figure \ref{fig:bigMatrix}. The method uses this final matrix to determine the angle and axis of rotation by the formulae shown in Figure \ref{fig:angleAxisformulae} \parenCite{theKey}. 
+Their compsite matrix would be computed by A = \[A_z*A_y*A_x\] and the result of this matrix multiplication operation is shown in Figure \ref{fig:bigMatrix}. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/4_bigMatrix.JPG}
+\includegraphics[scale=0.95]{Figures/4_bigMatrix.JPG}
 \caption[Composite Rotational Matrix]{The result of the matrix multiplication.}
-\label{fig:c}
+\label{fig:bigMatrix}
 \end{figure}
-
+The method uses this final matrix to determine the angle and axis of rotation by the formulae shown in Figure \ref{fig:angleAxisformulae}. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.45]{Figures/4_angleAxisMatrix.JPG}
+\includegraphics[scale=0.85]{Figures/4_angleAxisMatrix.JPG}
 \caption[Rotational Angle and Axis Formulae]{The formulae which determine the angle of rotation and the axis of rotation <e1, e2, e3>.}
 \label{fig:angleAxisformulae}
 \end{figure}
