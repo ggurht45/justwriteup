@@ -57,7 +57,7 @@ This chapter will explain how these different possible orientations the user's h
 \centering
 \includegraphics[scale=0.45]{Figures/4_handFinalFix.JPG}
 \caption[Hand Fixed to Vertical Orientation]{This shows what the user's hand will look like after all of the possible rotational transforms have been undone and the hand has been fixed to a vertical orientation.}
-\label{fig:weirdHandShake}
+\label{fig:handFinalResult}
 \end{figure}
 This feature of the application makes it easier for the user to see what his or her hand is doing without requiring them to always contain their hand in a specific orientation. The goal of this application is to measure the accuracy with which a user is able to complete certain gestures, not the orientation of their hand. In fact, the algorithms that are used to grade the correctness of the user's attempted gesture do not take the user's hand orientation into account. They focus on the fingers bones and their relative orientations to each other. At the beginning of this project, one of the ideas discussed was to build some sort of rig which would be used to place the user's hand in a set orientation. However because of what will be explained in this chapter such a rig is no longer necessary.
 
@@ -178,19 +178,119 @@ This method does not rely on projections to the y-z plane to find out the pitch 
 %	SECTION 3 Simplified Hand Model
 %------------------------------------------------
 \section{Simplified Hand Model}
+One of the lessons that this project has highlighted for me is how important it is to simplify a complex problem when finding a solution to it. Of course this sounds like a relatively obvious lesson, but I feel this project forced me to practice it many times. I would like to give a short example of this by talking a little bit about the UIHandSuperSimple class that I wrote when I was working on the problem this chapter addresses. The aptly named super simple hand model was a model of the user's hand that has just three components, a rectangular box to represent the palm, a cylinder to represent the thumb and a sphere to represent the fingers. See Figure \ref{fig:superSimpleHand} to view this masterpiece. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_superSimpleHand.JPG}
+\caption[UIHandSuperSimple Hand]{A very basic model of the hand.}
+\label{fig:uncorrectedRoll}
+\end{figure}
+The reason this hand was important during my journey to solving this problem was because I could easily respresent different orientations in it by using just simple vectors. This allowed me to quickly debug and figure out errors in the way I was approaching things. The other Hand UI model could not be set only by a single vector in such a way that the every single bone of the hand would also be appropriately set. This was because that model relies on a lot more data from the Leap Device to build the model more accurately. The simplicity of dealing with this hand model eventually also allowed me to figure out how to undo the unwanted hand rotations for the UI display that were part of the Leap Motion data. 
 	
 	
 %------------------------------------------------
-%	SECTION 4 Composite Linear Transformations
+%	SECTION 4 Composite Rotational Transformations
 %------------------------------------------------
-\section{Composite Linear Transformations}
---combine these two. 
-%------------------------------------------------
-%	SECTION 5 Rotational Matrix
-%------------------------------------------------
-\section{Rotational Matrix}
+\section{Composite Rotational Transformations}
+To understand how the UI hand model is rotated to a vertical position, we will consider the starting hand position to be the "weird handshake position" as is shown in Figure \ref{fig:weirdHandShake}, which represents the left hand in a handshake position that is slightly pitched upwards along the x-axis and with a 45 degree yaw to the right around the y-axis. The method which will reset this user's hand to a vertical orientation automatically (without requiring the user to change the position of their hand at all) is shown in Figure \ref{fig:fixRotationsCode}. 
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+private void fixRotations(Hand h) {
+	//add a yaw to perform before the matrixRotateNode sets the axis and angle.
+	float firstYaw = getFirstYaw(h); // dont need to convert to radians for Rotate transform java class.
+	if (this.getTransforms().size() == 0) {
+		this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, 1, 0)));
+	} else {
+		this.getTransforms().set(0, new Rotate(firstYaw, new Point3D(0, 1, 0)));
+	}
 
+	//correct to fit Javafx coordinate system and convert to radians.
+	float pitch = (float) Math.toRadians(getPitch(h) * (-1.0f));
+	float finalYaw = (float) Math.toRadians(getFinalYaw(h) * (-1.0f));
+	float roll = 0;//roll is never needed
 
+	//order of operations: pitch, yaw, roll.
+	ViewMath.matrixRotateNode(this, roll, pitch, finalYaw);
+}
+\end{lstlisting}
+\caption[fixRotations() Function]{This function fixes the rotations of the UI Hand model so that it will be always displayed in a vertical orientation, no matter what orientation the user's hand is in.}
+\label{fig:fixRotationsCode}
+\end{figure}
+This method takes in a Leap Motion Hand object and basically performs three transformations on it. Firstly, it performs a yaw rotation of the amount determined by the getFirstYaw() method. The getFirstYaw() method determines what the angle of the hand's direction is to the negative z-axis; and so the first transform that will get added to the UI hand model is will rotate the hand about the y-axis. Figure \ref{fig:afterFirstYaw} shows what the hand model will look like after this first rotational transform has been performed. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_afterFirstYaw.JPG}
+\caption[After First Yaw]{The hand model of Figure \ref{fig:weirdHandShake} after first yaw.}
+\label{fig:afterFirstYaw}
+\end{figure}
+
+Secondly, the pitch angle is determined the getPitch() to see how much to rotate the hand upward to be inline with the y-axis. Also the finalYaw angle is determined using the getFinalYaw() method which will return an angle representing how much the hand model has to be rotated around the y-axis again when the hand is pointing upwards in the positive y-direction in the JavaFX coordinate system. There is no roll angle that is needed for putting the hand in a vertical position. The pitch and finalYaw angle (along with a 0 value for the roll angle) are passed into a helper function called matrixRotateNode(), shown in Figure \ref{fig:matrixRotateNode}. This method computes the composite rotational matrix based upon the angles that are passed into it and performs the correct composite rotation around the calculated axis of rotation on the JavaFX Node object that is passed into as its first argument. If for a moment we consider the hand model originally started in the weird handshake position as stated above, then after the first yaw, and pitch have been performed, the hand model will be resting with its fingers pointing straight up and its palm facing the x-axis. See Figure \ref{fig:afterPitch}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_afterPitch.JPG}
+\caption[After Pitch]{The hand model of Figure \ref{fig:weirdHandShake} after first yaw and pitch have been performed.}
+\label{fig:afterPitch}
+\end{figure}
+
+Finally, after the final yaw has also been performed, the hand model will be resting in the final vertical orientation with its fingers pointing up and the palm facing the negative z-axis as shown in Figure \ref{fig:finalPos}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/4_handFinalFix.JPG}
+\caption[After Final Yaw]{The hand model after it's orientation has been fixed.}
+\label{fig:finalPos}
+\end{figure}
+The final yaw angle is determined by which direction the palm normal of the leap motion hand is facing. This palm normal can be pointing along the x-axis or the z-axis. A weighted average of the two directions is taken to determine the angle to be computed for the final yaw. 
+
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+public static void matrixRotateNode(Node n, double roll, double pitch, double yaw) {
+	//build rotational matrix
+	double A11 = Math.cos(roll) * Math.cos(yaw);
+	...
+	double A32 = -Math.cos(yaw) * Math.sin(pitch);
+	double A33 = Math.cos(pitch) * Math.cos(yaw);
+
+	//angle of rotation
+	double angleOfRotation = Math.acos((A11 + A22 + A33 - 1d) / 2d);
+	if (angleOfRotation != 0d) {
+		double den = 2d * Math.sin(angleOfRotation);
+		Point3D axisOfRotation = new Point3D((A32 - A23) / den, (A13 - A31) / den, (A21 - A12) / den);
+		//rotate node
+		n.setRotationAxis(axisOfRotation);
+		n.setRotate(Math.toDegrees(angleOfRotation));
+	}
+}
+\end{lstlisting}
+\caption[matrixRotateNode() Function]{This function takes in a JavaFX node object and three angles representing the roll, pitch and yaw angles and returns that object after it has been rotated by appropriate final angle around the computed axis of rotation.}
+\label{fig:matrixRotateNode}
+\end{figure}
+
+The code shown in the matrixRotateNode() in the Figure \ref{fig:matrixRotateNode} above looks very complicated. It is the result of mathematical formulas that determine how to rotate an object in 3D space. Given three angles representing the pitch, yaw and roll we can compute a final matrix of rotation from the three smaller matrices that would represent rotations about the specific x-axis, y-axis, z-axis that the pitch, yaw, and roll angles would represent respectively. The matrices that would represent these three individual rotations are shown in Figure \ref{fig:threeMatrices}. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/4_handFinalFix.JPG}
+\caption[Single Rotation Matrices]{The three matrices representing individual rotations about the x, y, and z axis.}
+\label{fig:threeMatrices}
+\end{figure}
+
+Their compsite matrix would be computed by A = \[A_z*A_y*A_x\] and the result of this matrix multiplication operation is shown in Figure \ref{fig:bigMatrix}. The method uses this final matrix to determine the angle and axis of rotation by the formulae shown in Figure \ref{fig:angleAxisformulae} \parenCite{theKey}. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/4_bigMatrix.JPG}
+\caption[Composite Rotational Matrix]{The result of the matrix multiplication.}
+\label{fig:c}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{Figures/4_angleAxisMatrix.JPG}
+\caption[Rotational Angle and Axis Formulae]{The formulae which determine the angle of rotation and the axis of rotation <e1, e2, e3>.}
+\label{fig:angleAxisformulae}
+\end{figure}
+
+%make sure to cite 
 
 
 
