@@ -29,7 +29,7 @@ The UI model of the hand is built from the Leap Motion sensor data as discussed 
 \caption[Hand in Flat Orientation]{This shows the user's hand in a flat orientation; as determined by the Leap Motion sensor.}
 \label{fig:handFlat}
 \end{figure}
-It should noted how difficult it is to see the fingers and thumb. They are only barely visible. Therefore the user would be forced to force his or her hand into a vertical postion by straining their wrist just so they can see the gesture they are performing on the screen. Figures \ref{fig:handYaw} and \ref{fig:handRoll} show other orientation the hand can take; these figures show the hand after a yaw rotation and after a roll rotation respectively. Again, note the slight difficulty in figuring out the thumb and fingers positions and orientations when the hand is rolled around the z-axis. The hand that is shown in the yaw rotation in Figure \ref{fig:handYaw} is able to seen a little clearly because the wrist was strained upwards. 
+It should noted how difficult it is to see the fingers and thumb. They are only barely visible. Therefore the user would be forced to force his or her hand into a vertical position by straining their wrist just so they can see the gesture they are performing on the screen. Figures \ref{fig:handYaw} and \ref{fig:handRoll} show other orientation the hand can take; these figures show the hand after a yaw rotation and after a roll rotation respectively. Again, note the slight difficulty in figuring out the thumb and fingers positions and orientations when the hand is rolled around the z-axis. The hand that is shown in the yaw rotation in Figure \ref{fig:handYaw} is able to seen a little clearly because the wrist was strained upwards. 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.5\textwidth}
@@ -67,7 +67,7 @@ This feature of the application makes it easier for the user to see what his or 
 %	SECTION 1 JavaFx CS vs Leap Motion CS
 %------------------------------------------------
 \section{JavaFx Coordinate System vs Leap Motion Coordinate System}
-The Leap Motion controller has a different coordinate system from JavaFX. This distinction is very important to get out of the way as the rest of the chapter will rely on such an understanding. The coordinate system for the Leap Motion device is shown in Figure \ref{fig:leapcs}. Note the placement of the green LED light in the Leap Motion device as shows the orientation of the otherwise symetrical picture.
+The Leap Motion controller has a different coordinate system from JavaFX. This distinction is very important to get out of the way as the rest of the chapter will rely on such an understanding. The coordinate system for the Leap Motion device is shown in Figure \ref{fig:leapcs}. Note the placement of the green LED light in the Leap Motion device as shows the orientation of the otherwise symmetrical picture.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{Figures/4_leapCS.JPG}
@@ -98,33 +98,80 @@ Understanding these somewhat subtle difference and being able to switch from one
 %	SECTION 2 Unexpected Leap Motion API Results 
 %------------------------------------------------
 \section{Unexpected Leap Motion API Results} 
-In the course of working on this feature, which was explained in first section of this chapter, I realized that I was being returned results from the Leap Motion API that I was not expecting. I tested and debugged further into these issues until I realized some interesting things about the Leap Motion API which helped me to implement the vertical rotation of the user's hand successfully. In this section, I will go over some of the unexpected results that I obtained when I was learning more about the Leap Motion API's. I created a speciall Java class to help me in this endeaver which contains code samples with some simple yet illustrative scenarios which show how the Leap Motion API works. 
+In the course of working on this feature, which was explained in first section of this chapter, I realized that I was being returned results from the Leap Motion API that I was not expecting. I tested and debugged further into these issues until I realized some interesting things about the Leap Motion API which helped me to implement the vertical rotation of the user's hand successfully. In this section, I will go over some of the unexpected results that I obtained when I was learning more about the Leap Motion API's. I created a special Java class to help me in this endeavor which contains code samples with some simple yet illustrative scenarios which show how the Leap Motion API works.
+
+I first noticed these problems when I was working user hand data, however, I soon realized these issues were more so with how the Vector is defined in the Leap Motion API. Therefore, the examples shown in this section will primarily be using vectors to illustrate the issues encountered, but of course these issues then extend to the collected hand data because of the nature of how Hand objects are defined in Leap Motion.
+
+
+%----------------------------------- Pitch, Roll, Yaw in Leap API
+\subsection{Pitch, Roll, Yaw in Leap API}
+Leap Motion's Java API includes a Vector class that contains several useful operations one might need to perform. For example, it include three functions that return the pitch, roll and yaw angles for the vector. However, right away we need to understand that these angles which are returned are with respect to certain axes. The pitch() is an instance method for a vector object that will return the angle between this vector's projection onto the y-z plane and the negative z-axis. Figure \ref{fig:pitchPic} shows this. Yaw is defined to be the angle between the negative z-axis and the projection of the vector onto the x-z plane (Figure \ref{fig:yawPic}. 
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[scale=.55]{Figures/4_pitchPic.JPG} 
+        \caption[Pitch]{Pitch angle.}
+		\label{fig:pitchPic}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[scale=.55]{Figures/4_yawPic.JPG}
+        \caption[Yaw]{Yaw angle.}
+        \label{fig:yawPic}
+    \end{minipage}
+\end{figure}
+
+roll() function is defined to be gotten by projecting the vector in question onto the x-y plane and taking the angle between this projection and the positive y-axis (which as we know is defined to be pointing upwards in the Leap Motion coordinate system and downwards in JavaFX). See Figure \ref{fig:rollPic} to get a visual understanding of how the roll angle is defined for a given vector.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_rollPic.JPG}
+\caption[Roll]{Roll angle as defined in Leap Motion documentation.}
+\label{fig:rollPic}
+\end{figure}
 
 
 
+%----------------------------------- Negative Zeros and Flipped Axes
+\subsection{Negative Zeros and Flipped Axes}
+During my testing, I realized that the Vector class returns some strange results when we test the pitch() function with the simple x-axis unit vector <1,0,0>. One would expect that the pitch would be zero, since the projection of the x-axis unit vector onto the y-z plane is zero. However, as the debugging result in Figure \ref{fig:negZero} shows, that was not the case. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_negZero.JPG}
+\caption[Pitch() Debugging]{A simple example's run output that demonstrates the negative zeros and their importance in Leap Motion API.}
+\label{fig:negZero}
+\end{figure}
 
+It appears to be that a negative zero must be supplied in the z-component of the vector to get a zero pitch angle. When I found this out, I was very surprised as it was the first time I realized that there was such a thing as a negative floating point zero. However,  another thing to note is that in the debug output, I have the word "corrected" next to the roll angle. 
 
+Like the pitch() angle, I noticed something that was a bit strange about the results the roll() function was returning during my debugging. It was returning 135 degrees when I was expecting it to return 45 degrees (see Figure \ref{fig:uncorrectedRoll}) because the vector it is being tested on makes such a projection onto the x-y plane that the roll should be 45. I think the documentation page either has a mistake the roll() method or maybe the Vector class has a error in the way the roll method is defined. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_rollUncorrected.JPG}
+\caption[Roll Debugging]{The roll() angle returned for a vector needs to be "corrected".}
+\label{fig:uncorrectedRoll}
+\end{figure}
 
-that some of the which I believed to be very simple scenarios  
-
-- discuss the problem found in debug helper. 
-- explain how you tried to do something very simple but the result surprised you. explain that here. 
-
-- pyr are on vectors. explain via vectors. the problem below. 
-- then explain the problem a little more in depth in terms of pry. and how they are not based on the wrist and palm. but rather on z-axis. 
-- and how they are not returning good values. 
-
-- can go a little bit into neg. zeros and how you solved this problem. 
-
-- 
-%----------------------------------- Pitch Roll Yaw
-\subsection{Pitch Roll Yaw}
-
-
-%----------------------------------- Negative Zeros
-\subsection{Negative Zeros}
-
-
+The angle being returned is actually between the negative y-axis (Leap Motion coordinate system) and the projection. Therefore I wrote my own correctedRoll() which basically takes a given roll angle and subtracts it from 180 degrees to return a roll angle that is in accordance to how roll() is defined in Leap Motion documentation. In response to finding out about these problems, I wrote my own methods to find pitch, roll and yaw when I was dealing with hand objects. The code for one of these methods is shown in Figure \ref{fig:pitchCode}.
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+private float getPitch(Hand h) {
+	//angle of hand direction to y-axis
+	float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+	//switch direction of angle
+	if (h.direction().getZ() > 0.0f) {
+		return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive pitch noticed in hand
+	} else {
+		//99 % of the time, pitch will be a positive angle, so this case will run most of the time.
+		return angleAmount;
+	}
+}
+\end{lstlisting}
+\caption[getPitch() Function]{This function returns the pitch of the hand object as the angle the hand makes to the x-z plane.}
+\label{fig:pitchCode}
+\end{figure}
+This method does not rely on projections to the y-z plane to find out the pitch of the hand. Intuitively, when I imagined the pitch of the hand model to be to angle it is making to the x-z plane; regardless of which direction the wrist or the fingers of the hand are pointing in. The Leap pitch() function expects the direction of the hand to be relatively inline with the z-axis in order to give a valid pitch measurement. The method I defined does not have this restriction and is able to return an informative pitch angle no matter if the user has rotated his/hand around the y-axis. I calculate the yaw for a particular hand in the same fashion, except for that function I take the angle between the direction of the hand and the negative z-axis. 
 
 
 %------------------------------------------------
@@ -137,10 +184,7 @@ that some of the which I believed to be very simple scenarios
 %	SECTION 4 Composite Linear Transformations
 %------------------------------------------------
 \section{Composite Linear Transformations}
-
-
-
-
+--combine these two. 
 %------------------------------------------------
 %	SECTION 5 Rotational Matrix
 %------------------------------------------------
