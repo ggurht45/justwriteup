@@ -44,7 +44,10 @@ goals
 	- explain how you solved your problems of jar not working. (last one or two sentences)--done
 	- discuss leap app store. --done
 	- show screenshots from intellij. --done
-
+	- this again is differn.. from javafx. --done
+	- also mention diff lhcs vs rhcs. sure, but show both, and comment how jfx doesnt fit with left or right. --don
+	- explain that understanding the difference import --done
+	- also mention that rotations convention of 90 degree rotation about x-axis. means looking down opposite end of axis and rotating. therefore, the different coordinate systems can really be tricky when combined with this. 90 around x means one thing in lmcs vs jcs. explain this.--done.
 
 
 	

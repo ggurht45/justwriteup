@@ -19,3 +19,12 @@ http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-control
 
 
 discontinued leap motion app store. 
+
+
+
+javafx vs leap motion coordinate system. 
+http://ruzman.de/blog/leap-motion-javafx-3d-hand-1
+
+
+left handed right handed coordinate system. 
+http://www.learnopengles.com/tag/left-handed-coordinate-system/

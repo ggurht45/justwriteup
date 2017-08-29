@@ -66,17 +66,57 @@ This feature of the application makes it easier for the user to see what his or 
 %------------------------------------------------
 %	SECTION 1 JavaFx CS vs Leap Motion CS
 %------------------------------------------------
-
 \section{JavaFx Coordinate System vs Leap Motion Coordinate System}
-	
+The Leap Motion controller has a different coordinate system from JavaFX. This distinction is very important to get out of the way as the rest of the chapter will rely on such an understanding. The coordinate system for the Leap Motion device is shown in Figure \ref{fig:leapcs}. Note the placement of the green LED light in the Leap Motion device as shows the orientation of the otherwise symetrical picture.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_leapCS.JPG}
+\caption[Leap Motion Coordinate System]{The coordinate system that is used by the Leap Motion sensor. Data collected will based upon these axes.}
+\label{fig:leapcs}
+\end{figure}
+
+This coordinate system is referred to as a right-handed coordinate system because of the easy way in which it can be represented by the first three fingers of the right hand as shown in Figure \ref{fig:lhcsRhcs}. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_lhrhCS.JPG}
+\caption[Left vs Right Hand Coordinate System]{Left and right handed coordinate systems and how they can be shown via fingers.}
+\label{fig:lhcsRhcs}
+\end{figure}
+
+In contrast, the traditional coordinate system which is used in computer science and which is what JavaFX also follows is shown in Figure \ref{fig:javafxcs}. The JavaFx coordinate system is not left handed or right handed as far as we can tell from the Figures shown. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{Figures/4_javafxCS.JPG}
+\caption[JavaFX Coordinate System]{The coordinate system used in JavaFX. Setting transforms on objects will be based on this coordinate system.}
+\label{fig:javafxcs}
+\end{figure}
+
+Understanding these somewhat subtle difference and being able to switch from one context to the other was very important when considering the various rotational transforms that needed to be applied to the Hand UI model in order to straighten it to a vertical position. For example, one of the things that caused me some headaches sometimes when I was fixing and debugging my code was the fact that 3D rotations are measured in a very specific way. When it is said that some object is rotated around the y-axis by 90 degrees, this means that the if we imagine ourselves to be an observer standing on the y-axis and looking down the negative direction of this y-axis, then we would observe the object to rotate counter-clockwise about the y-axis. Therefore, it becomes very clear why it is significant to have clear understanding of the coordinate system that is being used for a particular section of code. Leap Motion data is returned with the default settings of the Leap Motion coordinate system. This data must be appropriately modified when the code using it is based upon the JavaFX coordinate system. Likewise composite rotations around certain axis might become jumbled up if one is not careful.  	
 
 
 %------------------------------------------------
-%	SECTION 2 Ineffective Leap Motion Data
+%	SECTION 2 Unexpected Leap Motion API Results 
 %------------------------------------------------
-\section{Ineffective Leap Motion Data}
+\section{Unexpected Leap Motion API Results} 
+In the course of working on this feature, which was explained in first section of this chapter, I realized that I was being returned results from the Leap Motion API that I was not expecting. I tested and debugged further into these issues until I realized some interesting things about the Leap Motion API which helped me to implement the vertical rotation of the user's hand successfully. In this section, I will go over some of the unexpected results that I obtained when I was learning more about the Leap Motion API's. I created a speciall Java class to help me in this endeaver which contains code samples with some simple yet illustrative scenarios which show how the Leap Motion API works. 
 
 
+
+
+
+
+that some of the which I believed to be very simple scenarios  
+
+- discuss the problem found in debug helper. 
+- explain how you tried to do something very simple but the result surprised you. explain that here. 
+
+- pyr are on vectors. explain via vectors. the problem below. 
+- then explain the problem a little more in depth in terms of pry. and how they are not based on the wrist and palm. but rather on z-axis. 
+- and how they are not returning good values. 
+
+- can go a little bit into neg. zeros and how you solved this problem. 
+
+- 
 %----------------------------------- Pitch Roll Yaw
 \subsection{Pitch Roll Yaw}
 
@@ -90,16 +130,13 @@ This feature of the application makes it easier for the user to see what his or 
 %------------------------------------------------
 %	SECTION 3 Simplified Hand Model
 %------------------------------------------------
-
 \section{Simplified Hand Model}
 	
 	
 %------------------------------------------------
 %	SECTION 4 Composite Linear Transformations
 %------------------------------------------------
-
 \section{Composite Linear Transformations}
-
 
 
 
@@ -107,7 +144,6 @@ This feature of the application makes it easier for the user to see what his or 
 %------------------------------------------------
 %	SECTION 5 Rotational Matrix
 %------------------------------------------------
-
 \section{Rotational Matrix}
 
 
