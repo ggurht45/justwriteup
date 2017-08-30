@@ -1,5 +1,30 @@
 goals
 
+
+Averages orderd. 
+gesture1Right angleAvg: 73 componentAvg: 86
+gesture2Right angleAvg: 58 componentAvg: 78
+gesture3Right angleAvg: 87 componentAvg: 82
+gesture4Right angleAvg: 76 componentAvg: 88
+gesture5Right angleAvg: 89 componentAvg: 81
+gesture6Right angleAvg: 68 componentAvg: 81
+gesture7Right angleAvg: 81 componentAvg: 80
+gesture8Right angleAvg: 79 componentAvg: 79
+gesture9Right angleAvg: 84 componentAvg: 80
+gestue10Right angleAvg: 81 componentAvg: 80
+
+gesture1Left angleAvg: 83 componentAvg: 87
+gesture2Left angleAvg: 85 componentAvg: 79
+gesture3Left angleAvg: 83 componentAvg: 83
+gesture4Left angleAvg: 90 componentAvg: 91
+gesture5Left angleAvg: 51 componentAvg: 87
+gesture6Left angleAvg: 85 componentAvg: 80
+gesture7Left angleAvg: 29 componentAvg: 77
+gesture8Left angleAvg: 82 componentAvg: 81
+gesture9Left angleAvg: 89 componentAvg: 81
+gestue10Left angleAvg: 78 componentAvg: 76
+
+
 	- github --done
 	- make skeleton --done
 	- make function better. --done
