@@ -1,5 +1,12 @@
 goals
 
+Acknowledgements
+
+
+
+
+
+
 
 Averages orderd. 
 gesture1Right angleAvg: 73 componentAvg: 86
