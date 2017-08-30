@@ -34,7 +34,7 @@ Leap Motion controller, developed by Leap Motion Inc, US based company located i
 %----------------------------------- Leap Motion Java API
 \subsection{Leap SDK v2 Java API}
 %discuss about lm native libraries. 
-When the Leap Motion software is installed on one's computer, it does not include the libraries needed in order to develop applications utilizing the controller. In order to do that, the appropriate SDK version of the software must be downloaded from Leap Motion's website. The Java SDK version includes a JAR file and two native library files. The JAR file contains the Leap Motion API class definitions and the native libraries are OS platform specific files which allow a program using the Leap Motion API to communicate to the underlying service (Windows) or daemon (Linux or Mac) which is running the Leap Controller. Setting up a Java project requires that the distributed JAR file be set to the project's classpath. When running such a project, the JVM's library path parameter must be set to the location of the native libraries. A further discussion into the technicalities of setting up a Leap Motion Project in the Intellij IDE is carried out in Appendix A.
+When the Leap Motion software is installed on one's computer, it does not include the libraries needed in order to develop applications utilizing the controller. In order to do that, the appropriate SDK version of the software must be downloaded from Leap Motion's website. The Java SDK version includes a JAR file and two native library files. The JAR file contains the Leap Motion API class definitions and the native libraries are OS platform specific files which allow a program using the Leap Motion API to communicate to the underlying service (Windows) or daemon (Linux or Mac) which is running the Leap Controller. Setting up a Java project requires that the distributed JAR file be set to the project's classpath. When running such a project, the JVM's library path parameter must be set to the location of the native libraries.
 
 
 %api/data model general discussion
@@ -139,7 +139,7 @@ The UI components all extend from a parent Node class. One of the improvements t
 \label{fig:javafxSceneGraph}
 \end{figure}
 
-Now that the pure Java code approach of writing JavaFX applications has been introduced, let us discuss the other approach to writing JavaFX applications; FXML. FXML is an XML-based language created by Oracle Corporation for the purpose of making it easier to define the UI of a JavaFX application. While the pure Java code approach is a much more imperative and procedural way to write JavaFX applications, FXML is a more declarative way. It resembles HTML and can also reference a controller java class which can access and modify the UI elements defined in the FXML file. Figure \ref{fig:simpleFXML} shows a very simple FXML file that creates a VBox layout and adds a button to it. This FXML file also has a Java controller class attached to it which is called MyController.java and shown in Figure \ref{fig:simpleController}
+Now that the pure Java code approach of writing JavaFX applications has been introduced, let us discuss the other approach to writing JavaFX applications; FXML. FXML is an XML-based language created by Oracle Corporation for the purpose of making it easier to define the UI of a JavaFX application. While the pure Java code approach is a much more imperative and procedural way to write JavaFX applications, FXML is a more declarative way. It resembles HTML and can also reference a controller Java class which can access and modify the UI elements defined in the FXML file. Figure \ref{fig:simpleFXML} shows a very simple FXML file that creates a VBox layout and adds a button to it. This FXML file also has a Java controller class attached to it which is called MyController.java and shown in Figure \ref{fig:simpleController}
 
 \begin{figure}[th]
 \centering
@@ -169,7 +169,6 @@ public class MyController {
 	{
 	// this method runs first after all the UI components have been loaded and bound.
 	}
-	
 	@FXML
 	private void printHelloWorld() 
 	{
