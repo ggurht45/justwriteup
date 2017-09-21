@@ -201,11 +201,16 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
-\begin{comment}
+%\begin{comment}
 \begin{abstract}
-\addchaptertocentry{\abstractname}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\addchaptertocentry{\abstractname}
+This project created an application which can be used by clinicians working with patients who might have some forms of apraxia, which is a post-stroke condition that makes it difficult to control some muscle groups. These patients are currently diagnosed by human doctors based upon how well they are able to perform certain gestures. The inability to complete these gestures properly can indicate differing levels of apraxia. Of course, there might be slight level of human subjectivity in the diagnosis of this condition. 
+
+This project uses the Leap Motion controller to build an application that can be used by doctors working with patients with possible apraxia. It aims to provide two algorithms that can help to objectively score the gestures performed by patients. The two comparison functions both are successful in grading the gestures and will be discussed in the course of this paper. The project also focused on building a easy to use interface for the clinicians and patients who will be using this application. It is able to take into account the various rotations a user's hand might be doing and undo them appropriately on the screen to show a clear picture of the with the gesture being performed. 
+
+The result of this project is an application that can be used in the real world by clinicians.
 \end{abstract}
-\end{comment}
+%\end{comment}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
@@ -213,7 +218,13 @@ headsepline, % Uncomment to get a line under the header
 %\begin{comment}
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+There are so many people who have helped me to complete this project. It has been a very challenging task at times that was made more attainable through the help and guidance that they provided for me. 
+
+Firstly, I would like to thank my supervisor Dr. Irina Voiculescu. It has been my very good fortune to have found you as my supervisor. Your welcoming smile and your constant encouragements throughout my project have been more helpful than I think I can express. I always left your office feeling happy and with grand plans. Thank you so much for all of your help on this journey!
+
+I would like to thank Dr. Christopher Butler, Dr. Samrah Ahmed, and Nikolas Drummond whom I had the pleasure of working with at John Radcliffe Hospital. They always were so cheerful and supportive of the work I did. 
+
+Finally, I would like to acknowledge my family. Every weekend when I would chat with my grandma and my parents and siblings, I would receive nothing but love. Your belief in me has allowed me to stay up late nights without feeling lonely. I would like to thank you all deeply for your love and support. 
 \end{acknowledgements}
 %\end{comment}
 
@@ -239,8 +250,8 @@ The acknowledgments and the people to thank go here, don't forget to include you
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 %\include{Chapters/Chapter0}
-\include{Chapters/Chapter7_dataCollection}
-\begin{comment}
+%\include{Chapters/Chapter7_dataCollection}
+
 \include{Chapters/Chapter1_introduction}
 \include{Chapters/Chapter2_background}
 \include{Chapters/Chapter3_uiHandModel} 
@@ -249,7 +260,7 @@ The acknowledgments and the people to thank go here, don't forget to include you
 \include{Chapters/Chapter6_appUI}
 \include{Chapters/Chapter7_dataCollection}
 \include{Chapters/Chapter8_conclusion}
-\end{comment}
+
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
